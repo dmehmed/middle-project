@@ -1,13 +1,15 @@
 package system;
+import courses.Course;
 
+import courses.Course;
 import java.util.HashSet;
 import java.util.Set;
 
 public class CoursesStorage {
 	private Set<Course> courses;
 	
-	public UserStorage() {
-		this.users = new HashSet<Course>();
+	public CoursesStorage() {
+		this.courses = new HashSet<Course>();
 	}
 		
 	void add(Course course) {
