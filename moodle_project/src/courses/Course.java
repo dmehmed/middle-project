@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
-import documents.Section;
 import users.User;
 
 public class Course {

@@ -1,4 +1,4 @@
-package documents;
+package courses;
 
 import exceptions.NameException;
 import exceptions.ObjectCreationException;
@@ -10,20 +10,25 @@ public class Document {
 	private String title;
 	private String path;
 
-	public Document(String title, String path) {
+	public Document(String title, String path) throws ObjectCreationException {
 		try {
 			this.setTitle(title);
 			this.setPath(path);
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new ObjectCreationException("Cannot create this object", e);
+			throw new ObjectCreationException("Cannot create documet", e);
 		}
 
 	}
 
+	@Override
+	public String toString() {
+		return "Title: " + this.title;
+	}
+
 	private void setTitle(String title) throws NameException {
 		if (!Helper.isValid(title)) {
-			throw new NameException("Title for this document is not valid!");
+			throw new NameException("Invalid document title!");
 		}
 
 		this.title = title;
@@ -31,7 +36,7 @@ public class Document {
 
 	private void setPath(String path) throws PathException {
 		if (!Helper.isValid(path)) {
-			throw new PathException("Path for this document is not valid!");
+			throw new PathException("Invalid document path!");
 		}
 
 		this.path = path;
