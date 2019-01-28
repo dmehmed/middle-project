@@ -1,8 +1,5 @@
 package system;
 
-import courses.Course;
-import users.User;
-
 public class System {
 
 	private static System system_instance = null;
@@ -21,25 +18,25 @@ public class System {
 		return System.system_instance;
 	}
 
-	public static void addUser(User user) {
+	public static addUser(User user) {
 		if (user != null) {
 			System.usersStorage.add(user);
 		}
 	}
 
-	public static void removeUser(User user) {
+	public static removeUser(User user) {
 		if (user != null) {
 			System.usersStorage.remove(user);
 		}
 	}
 
-	public static void addCourse(Course course) {
+	public static addCourse(Course course) {
 		if (course != null) {
 			System.coursesStorage.add(course);
 		}
 	}
 
-	public static void removeCourse(Course course) {
+	public static removeCourse(Course course) {
 		if (course != null) {
 			System.coursesStorage.remove(course);
 		}
