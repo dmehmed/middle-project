@@ -1,6 +1,7 @@
 package system;
 
-import java.security.acl.Group;
+import courses.Course;
+
 
 public class System {
 	private static System system_instance = null;
@@ -21,25 +22,25 @@ public class System {
 	}
 	
 	
-	public static addUser(User user) {
+	public static void addUser(User user) {
 		if(user != null) {
 			System.usersStorage.add(user);
 		}
 	}
 	
-	public static removeUser(User user) {
+	public static void removeUser(User user) {
 		if(user != null) {
 			System.usersStorage.remove(user);
 		}
 	}
 	
-	public static addCourse(Course course) {
+	public static void addCourse(Course course) {
 		if(course != null) {
 			System.coursesStorage.add(course);
 		}
 	}
 	
-	public static removeCourse(Course course) {
+	public static void removeCourse(Course course) {
 		if(course != null) {
 			System.coursesStorage.remove(course);
 		}
