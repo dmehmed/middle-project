@@ -33,6 +33,11 @@ public class Section {
 		this.documents.stream().forEach(System.out::println);
 	}
 
+	@Override
+	public String toString() {
+		return "Section title: " + this.title;
+	}
+
 	void addDocument(Document doc) throws AddException {
 		if (!Helper.isValid(doc)) {
 			throw new AddException("Invalid document!");
@@ -57,6 +62,23 @@ public class Section {
 		if (!Helper.isValid(title)) {
 			throw new NameException("Invalid section title!");
 		}
+
+		this.title = title;
 	}
+
+//	public static void main(String[] args) throws ObjectCreationException, AddException {
+//
+//		Section sc = new Section("Lecture 1");
+//
+//		System.out.println(sc);
+//		System.out.println();
+//
+//		for (int i = 0; i < 10; i++) {
+//			sc.addDocument(new Document("Project.pdf", "D:Help"));
+//		}
+//		
+//		sc.listAllDocuments();
+//
+//	}
 
 }

@@ -13,8 +13,8 @@ public class Course {
 	private int id;
 	private String title;
 	private LocalDate start;
-	private User lecturer; // засега го оставям user
-	private Set<User> students;
+	private User lecturer; // for now it stay user
+	private Set<User> students; // here too
 	private List<Section> sections;
 
 }
