@@ -17,8 +17,4 @@ public class Course {
 	private Set<User> students;
 	private List<Section> sections;
 
-	private Course(String title) {
-
-	}
-
 }

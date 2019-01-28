@@ -7,10 +7,10 @@ import helper.Helper;
 
 public class Document {
 
-	private String title;
-	private String path;
+	private String title; // required
+	private String path; // required
 
-	public Document(String title, String path) throws ObjectCreationException {
+	Document(String title, String path) throws ObjectCreationException {
 		try {
 			this.setTitle(title);
 			this.setPath(path);
@@ -19,6 +19,22 @@ public class Document {
 			throw new ObjectCreationException("Cannot create documet", e);
 		}
 
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null || !(obj instanceof Document)) {
+			return false;
+		}
+
+		Document d = (Document) obj;
+
+		return this.title.equals(d.title) && this.path.equals(d.path);
+	}
+
+	@Override
+	public int hashCode() {
+		return this.title.hashCode() * this.path.hashCode();
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package courses;
 
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import exceptions.AddException;
@@ -10,10 +11,10 @@ import helper.Helper;
 
 public class Section {
 
-	private String title;
-	private List<Document> documents;
+	private String title; // required
+	private List<Document> documents; // elements in it are optional
 
-	public Section(String title) throws ObjectCreationException {
+	Section(String title) throws ObjectCreationException {
 		try {
 			this.setTitle(title);
 		} catch (NameException e) {
@@ -21,16 +22,18 @@ public class Section {
 			throw new ObjectCreationException("Cannot create section", e);
 		}
 
+		documents = new LinkedList<Document>();
 	}
 
-	public void listAll() {
-		System.out.println(this.title);
-		System.out.println();
+	String getTitle() {
+		return title;
+	}
 
+	void listAllDocuments() {
 		this.documents.stream().forEach(System.out::println);
 	}
 
-	public void addDocument(Document doc) throws AddException {
+	void addDocument(Document doc) throws AddException {
 		if (!Helper.isValid(doc)) {
 			throw new AddException("Invalid document!");
 		}
@@ -38,14 +41,14 @@ public class Section {
 		this.documents.add(doc);
 	}
 
-	public void removeDocument(Document doc) {
-
+	void removeDocument(Document doc) {
+		Document currentDocument = null;
 		for (Iterator<Document> it = this.documents.iterator(); it.hasNext();) {
-			Document d = it.next();
+			currentDocument = it.next();
 
-			if (d.equals(doc)) {
+			if (currentDocument.equals(doc)) {
 				it.remove();
-				return; // ако документа го има няколко пъти ще махне само първото срещане!
+				return; // delete only first document which is equals to parameter
 			}
 		}
 	}
