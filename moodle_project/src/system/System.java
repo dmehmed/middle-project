@@ -1,23 +1,23 @@
 package system;
 
 import courses.Course;
-
+import users.User;
 
 public class System {
+
 	private static System system_instance = null;
 	private static UsersStorage usersStorage = new UsersStorage();
 	private static CoursesStorage coursesStorage = new CoursesStorage();
-	
+
 	private System() {
-		
+
 	}
-	
-	
+
 	public static System getInstance() {
-		if(System.system_instance == null) {
+		if (System.system_instance == null) {
 			System.system_instance = new System();
 		}
-		
+
 		return System.system_instance;
 	}
 	
@@ -45,6 +45,5 @@ public class System {
 			System.coursesStorage.remove(course);
 		}
 	}
-	
-	
+
 }
