@@ -1,7 +1,5 @@
 package helper;
 
-import courses.Document;
-
 public abstract class Helper {
 
 	public static boolean isValid(String text) {
@@ -12,8 +10,8 @@ public abstract class Helper {
 		return false;
 	}
 
-	public static boolean isValid(Document doc) {
-		if (doc != null) {
+	public static boolean isValid(Object obj) {
+		if (obj != null) {
 			return true;
 		}
 

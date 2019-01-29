@@ -20,28 +20,27 @@ public class System {
 
 		return System.system_instance;
 	}
-	
-	
+
 	public static void addUser(User user) {
-		if(user != null) {
+		if (user != null) {
 			System.usersStorage.add(user);
 		}
 	}
-	
+
 	public static void removeUser(User user) {
-		if(user != null) {
+		if (user != null) {
 			System.usersStorage.remove(user);
 		}
 	}
-	
+
 	public static void addCourse(Course course) {
-		if(course != null) {
+		if (course != null) {
 			System.coursesStorage.add(course);
 		}
 	}
-	
+
 	public static void removeCourse(Course course) {
-		if(course != null) {
+		if (course != null) {
 			System.coursesStorage.remove(course);
 		}
 	}

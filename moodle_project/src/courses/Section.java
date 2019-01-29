@@ -4,15 +4,15 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import exceptions.AddException;
 import exceptions.NameException;
+import exceptions.NullObjectException;
 import exceptions.ObjectCreationException;
 import helper.Helper;
 
 public class Section {
 
 	private String title; // required
-	private List<Document> documents; // elements in it are optional
+	private List<Document> documents; // elements in it are optional but memory must be allocated
 
 	Section(String title) throws ObjectCreationException {
 		try {
@@ -22,25 +22,12 @@ public class Section {
 			throw new ObjectCreationException("Cannot create section", e);
 		}
 
-		documents = new LinkedList<Document>();
+		this.documents = new LinkedList<Document>();
 	}
 
-	String getTitle() {
-		return title;
-	}
-
-	void listAllDocuments() {
-		this.documents.stream().forEach(System.out::println);
-	}
-
-	@Override
-	public String toString() {
-		return "Section title: " + this.title;
-	}
-
-	void addDocument(Document doc) throws AddException {
+	void addDocument(Document doc) throws NullObjectException {
 		if (!Helper.isValid(doc)) {
-			throw new AddException("Invalid document!");
+			throw new NullObjectException("Invalid document!");
 		}
 
 		this.documents.add(doc);
@@ -56,6 +43,19 @@ public class Section {
 				return; // delete only first document which is equals to parameter
 			}
 		}
+	}
+
+	String getTitle() {
+		return this.title;
+	}
+
+	void listAllDocuments() {
+		this.documents.stream().forEach(System.out::println);
+	}
+
+	@Override
+	public String toString() {
+		return "Section title: " + this.title;
 	}
 
 	private void setTitle(String title) throws NameException {
