@@ -8,26 +8,46 @@ import users.User;
 public class UsersStorage {
 	private Set<User> users;
 
-	public UsersStorage() {
+	UsersStorage() {
 		this.users = new HashSet<User>();
 	}
 
-	void add(User user) {
-		if (user != null) {
+	
+	boolean add(User user) {
+		if (user == null) {
+			return false;
+		}
+		
+		if(!this.users.contains(user)) {
 			this.users.add(user);
+			return true;
+		} else {
+			return false;
 		}
 	}
 
-	void remove(User user) {
-		if (user != null) {
-			this.users.remove(user);
+	boolean remove(User user) {
+		if (user == null) {
+			return false;
+		}
+		
+		if(!this.users.contains(user)) {
+			return false;
+		}
+		
+		this.users.remove(user);
+		return true;
+	}
+	 
+	void listAll() {
+		if(this.users.isEmpty()) {
+			java.lang.System.out.println("No users to list!");
+			return;
+		}
+		
+		for(User user : this.users) {
+			java.lang.System.out.println(user);
 		}
 	}
-
-	/*
-	 * void search(User user) { if(user != null) {
-	 * 
-	 * } }
-	 */
 
 }

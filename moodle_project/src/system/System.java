@@ -6,13 +6,12 @@ import users.User;
 public class System {
 
 	private static System system_instance = null;
-	private static UsersStorage usersStorage = new UsersStorage();
-	private static CoursesStorage coursesStorage = new CoursesStorage();
+	private UsersStorage usersStorage = new UsersStorage();
+	private CoursesStorage coursesStorage = new CoursesStorage();
 
-	private System() {
+	private System() {}
 
-	}
-
+	
 	public static System getInstance() {
 		if (System.system_instance == null) {
 			System.system_instance = new System();
@@ -21,28 +20,71 @@ public class System {
 		return System.system_instance;
 	}
 
-	public static void addUser(User user) {
-		if (user != null) {
-			System.usersStorage.add(user);
+
+	public boolean registerUser(User user) {
+		if(user == null) {
+			java.lang.System.out.println("Invalid user argument given!");
+			return false;
 		}
+
+		if (this.usersStorage.add(user)) {
+			java.lang.System.out.println("Successful user registration!");
+			return true;
+		}
+		
+		java.lang.System.out.println("The user alredy exists in Database!");
+		return false;
+	}
+	
+	public boolean removeUser(User user) {
+		if (user == null) {
+			java.lang.System.out.println("Invalid user argument given!");
+			return false;
+		}
+		
+		if(this.usersStorage.remove(user)) {
+			java.lang.System.out.println("User was successfully deleted from Database!");
+			return true;
+		}
+		
+		java.lang.System.out.println("Such user does not exist!");
+		return false;
+	}
+	
+	
+	public boolean registerCourse(Course course) {
+		if(course == null) {
+			java.lang.System.out.println("Invalid course argument given!");
+			return false;
+		}
+		
+		if(this.coursesStorage.add(course)) {
+			java.lang.System.out.println("Successful course registration!");
+			return true;
+		}
+		
+		java.lang.System.out.println("The course alredy exists in Database!");
+		return false;
 	}
 
-	public static void removeUser(User user) {
-		if (user != null) {
-			System.usersStorage.remove(user);
+	public boolean removeCourse(Course course) {
+		if (course == null) {
+			java.lang.System.out.println("Invalid course argument given!");
+			return false;
 		}
-	}
-
-	public static void addCourse(Course course) {
-		if (course != null) {
-			System.coursesStorage.add(course);
+		
+		if(this.coursesStorage.remove(course)) {
+			java.lang.System.out.println("Course was successfully deleted from Database!");
+			return true;
 		}
+		
+		java.lang.System.out.println("Such course does not exist!");
+		return false;
 	}
-
-	public static void removeCourse(Course course) {
-		if (course != null) {
-			System.coursesStorage.remove(course);
-		}
+	
+	
+	public void listAllUsers() {
+		this.usersStorage.listAll();
 	}
-
+	
 }
