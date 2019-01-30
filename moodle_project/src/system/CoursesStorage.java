@@ -40,5 +40,16 @@ public class CoursesStorage {
 		return true;
 	}
 	
+	void listAllCourses() {
+		if(this.courses.isEmpty()) {
+			java.lang.System.out.println("No courses to list!");
+			return;
+		}
+		
+		for(Course course : courses) {
+			java.lang.System.out.println(course);
+		}
+		
+	}
 
 }

@@ -87,4 +87,9 @@ public class System {
 		this.usersStorage.listAll();
 	}
 	
+	public void listAllCourses() {
+		this.coursesStorage.listAllCourses();
+	}
+	
+	
 }
