@@ -6,10 +6,10 @@ import java.util.TreeSet;
 
 import system.System;
 import courses.Course;
-import exceptions.ObjectCreationException; 
+import exceptions.ObjectCreationException;
+import helper.Helper;
 
-
-public abstract class User {
+public class User {
 
 	private final String username;
 	private String password;
@@ -19,103 +19,104 @@ public abstract class User {
 	private boolean hasRegistration;
 	private System system = System.getInstance();
 	private Set<Course> courses = new TreeSet<Course>();
-	
-	public User() {
-		
-	}
-	
-	
-	/*public void register() {
-		if(this.hasRegistration) {
-			java.lang.System.out.println("You have registration!");
-			return;
-		}
-		
-		Scanner input = new Scanner(java.lang.System.in);
-		java.lang.System.out.print("Username: ");
-		String username = input.nextLine();
-		java.lang.System.out.print("Password: ");
-		String password = input.nextLine();
-		java.lang.System.out.print("Name: ");
-		String name = input.nextLine();
-		java.lang.System.out.println("Address: ");
-		java.lang.System.out.print("Country: ");
-		String country = input.nextLine();
-		java.lang.System.out.print("City: ");
-		String city = input.nextLine();
-		java.lang.System.out.print("Street: ");
-		String street = input.nextLine();
-		
-		try {
-			Address address = new Address(country, city, street);
-		} catch (ObjectCreationException e) {
-			e.printStackTrace();
-		}
-		
+
+	public User(String username) {
 		this.username = username;
-		this.password = password;
-		this.name = name;
-		this.address = address;
-		
-		if(this.system.registerUser(this)) {
-			this.hasRegistraion = true;
-			return;
-		}
-		
-	}*/
-	
-	
+	}
+
+	/*
+	 * public void register() { if(this.hasRegistration) {
+	 * java.lang.System.out.println("You have registration!"); return; }
+	 * 
+	 * Scanner input = new Scanner(java.lang.System.in);
+	 * java.lang.System.out.print("Username: "); String username = input.nextLine();
+	 * java.lang.System.out.print("Password: "); String password = input.nextLine();
+	 * java.lang.System.out.print("Name: "); String name = input.nextLine();
+	 * java.lang.System.out.println("Address: ");
+	 * java.lang.System.out.print("Country: "); String country = input.nextLine();
+	 * java.lang.System.out.print("City: "); String city = input.nextLine();
+	 * java.lang.System.out.print("Street: "); String street = input.nextLine();
+	 * 
+	 * try { Address address = new Address(country, city, street); } catch
+	 * (ObjectCreationException e) { e.printStackTrace(); }
+	 * 
+	 * this.username = username; this.password = password; this.name = name;
+	 * this.address = address;
+	 * 
+	 * if(this.system.registerUser(this)) { this.hasRegistraion = true; return; }
+	 * 
+	 * }
+	 */
+
+	@Override
+	public String toString() {
+		return this.username;
+	}
+
+	@Override
+	public int hashCode() {
+		return this.username.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return Helper.isValid(obj) && obj instanceof User ? this.username.equals(((User) obj).username) : false;
+	}
+
 	public void logIn() {
-		if(!this.hasRegistration) {
+		if (!this.hasRegistration) {
 			java.lang.System.out.println("You must have a registration to log in!");
 			return;
 		}
-		
-		if(this.isOnline) {
+
+		if (this.isOnline) {
 			java.lang.System.out.println("You are already logged in!");
 			return;
 		}
-		
+
 		Scanner input = new Scanner(java.lang.System.in);
 		java.lang.System.out.print("Username: ");
 		String username = input.nextLine();
 		java.lang.System.out.print("Password: ");
 		String password = input.nextLine();
-		
-		if(username.equals(this.username) && password.equals(this.password)) {
+
+		if (username.equals(this.username) && password.equals(this.password)) {
 			java.lang.System.out.println("You successfully logged in!");
 			input.close();
 			return;
 		}
-		
+
 		java.lang.System.out.println("Invalid username or password! Please try again!");
 		input.close();
 	}
-	
-	public void listAllCourses() {	// List all courses in the System
+
+	public void listAllCourses() { // List all courses in the System
 		this.system.listAllCourses();
 	}
-	
-	public void listMyCourses() { 	// List all user`s courses
-		if(!this.hasRegistration) {	// Must have registration to use this function 
-			this.register();		
+
+	public void listMyCourses() { // List all user`s courses
+		if (!this.hasRegistration) { // Must have registration to use this function
+			this.register();
 			return;
 		}
-		
-		if(!this.isOnline) {	// Must be logged in to list my courses
+
+		if (!this.isOnline) { // Must be logged in to list my courses
 			this.logIn();
 		}
-		
-		if(!this.courses.isEmpty()) {
+
+		if (!this.courses.isEmpty()) {
 			java.lang.System.out.println("No courses to list!");
 			return;
 		}
-		
-		for(Course course : this.courses) {
+
+		for (Course course : this.courses) {
 			java.lang.System.out.println(course);
 		}
-		
+
 	}
-	
-	
+
+	public String getUsername() {
+		return this.username;
+	}
+
 }

@@ -39,7 +39,11 @@ public class Document {
 
 	@Override
 	public String toString() {
-		return "Title: " + this.title;
+		return this.title;
+	}
+
+	public String getTitle() {
+		return this.title;
 	}
 
 	private void setTitle(String title) throws NameException {

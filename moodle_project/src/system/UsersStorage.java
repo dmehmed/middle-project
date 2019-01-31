@@ -1,25 +1,45 @@
 package system;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import users.User;
 
 public class UsersStorage {
-	private Set<User> users;
 
-	UsersStorage() {
-		this.users = new HashSet<User>();
+	private static UsersStorage storage = null;
+	private Map<String, User> users;
+
+	private UsersStorage() {
+		this.users = new HashMap<String, User>();
 	}
 
-	
+	public User getUser(String username) {
+
+		if (!users.containsKey(username)) {
+			java.lang.System.out.println("There is no such user!");
+			return null;
+		}
+
+		return this.users.get(username);
+	}
+
+	public static UsersStorage getInstance() {
+		if (UsersStorage.storage == null) {
+			UsersStorage.storage = new UsersStorage();
+		}
+
+		return UsersStorage.storage;
+	}
+
 	boolean add(User user) {
 		if (user == null) {
 			return false;
 		}
-		
-		if(!this.users.contains(user)) {
-			this.users.add(user);
+
+		if (!this.users.containsKey(user.getUsername())) {
+			this.users.put(user.getUsername(), user);
 			return true;
 		} else {
 			return false;
@@ -30,23 +50,23 @@ public class UsersStorage {
 		if (user == null) {
 			return false;
 		}
-		
-		if(!this.users.contains(user)) {
+
+		if (!this.users.containsKey(user)) {
 			return false;
 		}
-		
+
 		this.users.remove(user);
 		return true;
 	}
-	 
+
 	void listAll() {
-		if(this.users.isEmpty()) {
+		if (this.users.isEmpty()) {
 			java.lang.System.out.println("No users to list!");
 			return;
 		}
-		
-		for(User user : this.users) {
-			java.lang.System.out.println(user);
+
+		for (Entry<String, User> entry : this.users.entrySet()) {
+			java.lang.System.out.println(entry.getValue());
 		}
 	}
 
