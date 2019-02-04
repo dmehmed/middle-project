@@ -6,58 +6,38 @@ import helper.Helper;
 
 public class Address {
 
-	private String country; // required
-	private String city; // required
-	private String street; // optional
+	private String country; // optional
+	private String city; // optional
 
-	Address(String country, String city) throws ObjectCreationException {
-		try {
-			this.setCountry(country);
-			this.setCity(city);
-		} catch (NameException e) {
-			e.printStackTrace();
-			throw new ObjectCreationException("Cannot create address", e);
-		}
+	private Address() {
 	}
 
-	Address(String country, String city, String street) throws ObjectCreationException {
-		this(country, city);
+	public static Address getAddress(String country, String city) {
+		Address a = new Address();
 
-		try {
-			this.setStreet(street);
-		} catch (NameException e) {
-			e.printStackTrace();
-			throw new ObjectCreationException("Cannot create address", e);
+		if (country != "") {
+			a.setCountry(country);
 		}
+
+		if (city != "") {
+			a.setCity(city);
+		}
+
+		return a;
 	}
 
 	@Override
 	public String toString() {
-		return this.country + ", " + this.city + (street != null ? ", " + this.street : "");
+		return (this.country != null ? this.country : "") + (this.country != null && this.city != null ? ", " : "")
+				+ (this.city != null ? this.city : "");
 	}
 
-	private void setCountry(String country) throws NameException {
-		if (!Helper.isValid(country)) {
-			throw new NameException("Invalid address country name!");
-		}
-
+	private void setCountry(String country) {
 		this.country = country;
 	}
 
-	private void setCity(String city) throws NameException {
-		if (!Helper.isValid(city)) {
-			throw new NameException("Invalid address city name!");
-		}
-
+	private void setCity(String city) {
 		this.city = city;
-	}
-
-	private void setStreet(String street) throws NameException {
-		if (!Helper.isValid(street)) {
-			throw new NameException("Invalid address country!");
-		}
-
-		this.street = street;
 	}
 
 }

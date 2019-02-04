@@ -14,7 +14,7 @@ import system.UsersStorage;
 import users.Admin;
 import users.User;
 
-public class Course implements Viewable, Updatable {
+public class Course implements Updatable {
 
 	private String title; // required
 	private final LocalDate start; // automatically generation when course is created
@@ -32,6 +32,7 @@ public class Course implements Viewable, Updatable {
 
 	}
 
+	// it is not necessary to have factory method
 	public static Course getInstance(String title, Admin lecturer) throws NullObjectException, NameException {
 		if (!Helper.isValid(title)) {
 			throw new NameException("Invalid course title!");
@@ -42,6 +43,8 @@ public class Course implements Viewable, Updatable {
 		}
 
 		return new Course(title, lecturer);
+		// izvikai sistemata da go dobavi
+
 	}
 
 	@Override
@@ -228,13 +231,10 @@ public class Course implements Viewable, Updatable {
 //
 //			c.view();
 //		} catch (NameException e) {
-//			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		} catch (NullObjectException e) {
-//			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		} catch (ObjectCreationException e) {
-//			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
 //

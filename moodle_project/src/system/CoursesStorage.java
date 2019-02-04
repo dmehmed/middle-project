@@ -1,15 +1,31 @@
 package system;
 
-import courses.Course;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
+
+import courses.Course;
 
 public class CoursesStorage {
 
-	private Set<Course> courses;
+	private static CoursesStorage instance = null;
+	private Map<String, Course> courses;
 
-	CoursesStorage() {
-		this.courses = new HashSet<Course>();
+	private CoursesStorage() {
+		this.courses = new HashMap<String, Course>();
+	}
+
+	public static CoursesStorage getInstance() {
+		if (CoursesStorage.instance == null) {
+			CoursesStorage.instance = new CoursesStorage();
+		}
+
+		return CoursesStorage.instance;
+	}
+
+	public void listCategories() {
+		this.courses.keySet().stream().forEach(System.out::println);
 	}
 
 	boolean add(Course course) {
@@ -17,8 +33,8 @@ public class CoursesStorage {
 			return false;
 		}
 
-		if (!this.courses.contains(course)) {
-			this.courses.add(course);
+		if (!this.courses.containsKey(course)) {
+			this.courses.put("", course);
 			return true;
 		} else {
 			return false;
@@ -30,7 +46,7 @@ public class CoursesStorage {
 			return false;
 		}
 
-		if (!this.courses.contains(course)) {
+		if (!this.courses.containsKey(course)) {
 			return false;
 		}
 
@@ -44,9 +60,9 @@ public class CoursesStorage {
 			return;
 		}
 
-		for (Course course : courses) {
-			java.lang.System.out.println(course);
-		}
+//		for (Course course : courses) {
+//			java.lang.System.out.println(course);
+//		}
 
 	}
 

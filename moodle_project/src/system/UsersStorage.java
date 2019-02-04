@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import helper.Helper;
 import users.User;
 
 public class UsersStorage {
@@ -15,22 +16,49 @@ public class UsersStorage {
 		this.users = new HashMap<String, User>();
 	}
 
-	public User getUser(String username) {
-
-		if (!users.containsKey(username)) {
-			java.lang.System.out.println("There is no such user!");
-			return null;
-		}
-
-		return this.users.get(username);
-	}
-
 	public static UsersStorage getInstance() {
 		if (UsersStorage.storage == null) {
 			UsersStorage.storage = new UsersStorage();
 		}
 
 		return UsersStorage.storage;
+	}
+
+	public User getUser(String username) {
+
+		if (!this.users.containsKey(username)) {
+			System.out.println("Such user does not exist!");
+			return null;
+		}
+
+		User user = this.users.get(username);
+		return user;
+	}
+
+	public User getUser(String username, String password) {
+
+		if (!this.users.containsKey(username)) {
+			System.out.println("Such user does not exist!");
+			return null;
+		}
+
+		User user = this.users.get(username);
+
+		if (!user.getPassword().equals(password)) {
+			System.out.println("Wrong password!");
+			return null;
+		}
+
+		user.setOnline();
+		return user;
+	}
+
+	public void addUser(User newUser) {
+		if (!Helper.isValid(newUser)) {
+			return;
+		}
+
+		this.users.put(newUser.getUsername(), newUser);
 	}
 
 	boolean add(User user) {
@@ -68,6 +96,10 @@ public class UsersStorage {
 		for (Entry<String, User> entry : this.users.entrySet()) {
 			java.lang.System.out.println(entry.getValue());
 		}
+	}
+
+	public boolean searchUser(String username) {
+		return this.users.containsKey(username);
 	}
 
 }
