@@ -79,4 +79,47 @@ public class AdminCommandListener extends ActiveProfileListener {
 
 	}
 
+//
+//			this.showAdminMenu();
+//			command = scanner.nextInt();
+//			if (command == EXIT_SYSTEM_COMMAND) {
+//				return;
+//			}
+//
+//			if (command == VIEW_PROFILE_COMMAND) {
+//				user.viewProfileInfo();
+//			}
+//
+//			if (command == VIEW_USER_COURSES_COMMAND) {
+//				user.listCourses();
+//			}
+//
+//			if (command == VIEW_COURSE_INFO_COMMAND) {
+//				System.out.print("Enter course name: ");
+//				String course = scanner.nextLine();
+//				user.viewCourseInfo(course);
+//			}
+//
+//			if (command == VIEW_PARTICIPANTS_IN_COURSE_COMMAND) {
+//				System.out.print("Enter course name: ");
+//				String course = scanner.nextLine();
+//				user.viewParticipantsInCourse(course);
+//			}
+////
+////			if (command == ADD_PARTICIPANT_IN_COURSE_COMMAND) {
+////				user.addParticipantInCourse(course, participant);
+////			}
+////
+////			if(command == REMOVE_PARTICIPANT_IN_COURSE_COMMAND) {
+////				user.removeParticipantInCourse(course, participant);
+////			}
+////			
+////			if(command == ) { 
+////				
+////			}
+//
+//			if (command == LOG_OUT_COMMAND) {
+//				break;
+//			}
+
 }

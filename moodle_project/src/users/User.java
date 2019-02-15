@@ -18,7 +18,7 @@ public class User {
 	private String surname; // required
 	private Address address; // optional
 	private boolean isOnline; // automatically generated
-	private Set<Viewable> courses = new TreeSet<Viewable>(); // sorted by day of creation from new to old
+	private Set<Viewable> courses; // sorted by day of creation from new to old
 
 	User(String username, String password, String firstName, String surname, Address address) {
 		this.username = username;
@@ -26,45 +26,7 @@ public class User {
 		this.firstName = firstName;
 		this.surname = surname;
 		this.address = address;
-	}
-
-	public String getUsername() {
-		return this.username;
-	}
-
-	public String getPassword() {
-		return this.password;
-	}
-
-	public boolean isOnline() {
-		return isOnline;
-	}
-
-	public void setOnline() {
-		this.isOnline = true;
-	}
-
-	public void setOffline() {
-		this.isOnline = false;
-	}
-
-	@Override
-	public String toString() {
-		return this.firstName + " " + this.surname;
-	}
-
-	@Override
-	public int hashCode() {
-		return this.username.hashCode();
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		return Helper.isValid(obj) && obj instanceof User ? this.username.equals(((User) obj).username) : false;
-	}
-
-	public static int getMinPasswordLength() {
-		return User.MIN_LENGTH_PASSWORD;
+		this.courses = new TreeSet<Viewable>();
 	}
 
 	public void viewProfileInfo() {
@@ -130,6 +92,41 @@ public class User {
 				}
 			}
 		}
+	}
+
+	@Override
+	public String toString() {
+		return this.firstName + " " + this.surname;
+	}
+
+	@Override
+	public int hashCode() {
+		return this.username.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return Helper.isValid(obj) && obj instanceof User ? this.username.equals(((User) obj).username) : false;
+	}
+
+	public static int getMinPasswordLength() {
+		return User.MIN_LENGTH_PASSWORD;
+	}
+
+	public String getUsername() {
+		return this.username;
+	}
+
+	public String getPassword() {
+		return this.password;
+	}
+
+	public void setOnline() {
+		this.isOnline = true;
+	}
+
+	public void setOffline() {
+		this.isOnline = false;
 	}
 
 	private boolean isThereCourse(String course) {

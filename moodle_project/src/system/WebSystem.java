@@ -2,6 +2,7 @@ package system;
 
 import java.util.Scanner;
 
+import courses.Course;
 import helper.Helper;
 import listeners.CommandListener;
 import listeners.GuestCommandListener;
@@ -10,10 +11,6 @@ import users.User;
 import users.UserBuilder;
 
 public class WebSystem implements IWebSystem {
-
-	private static final int REMOVE_PARTICIPANT_IN_COURSE_COMMAND = 6;
-
-	private static final int ADD_PARTICIPANT_IN_COURSE_COMMAND = 5;
 
 	private static final int EXIT_SYSTEM_COMMAND = 0;
 	private static final String COMMAND_SKIP_OPTIONAL_FIELDS_REGISTRATION = "skip";
@@ -96,7 +93,7 @@ public class WebSystem implements IWebSystem {
 
 		System.out.println("* Enter username:");
 		String username = scanner.next();
-		System.out.println("* Enter password:");
+		System.out.println("* Enter password (min 6 symbols):");
 		String password = scanner.next();
 		System.out.println("* Enter first name:");
 		String firstName = scanner.next();
