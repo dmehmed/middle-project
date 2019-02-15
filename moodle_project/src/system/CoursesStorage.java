@@ -24,6 +24,16 @@ public class CoursesStorage {
 		return CoursesStorage.instance;
 	}
 
+	public Course getCourse(String course) {
+		if (!this.courses.containsKey(course)) {
+			System.out.println("There is no such course in system!");
+			return null;
+		}
+
+		return this.courses.get(course);
+
+	}
+
 	public void listCategories() {
 		this.courses.keySet().stream().forEach(System.out::println);
 	}

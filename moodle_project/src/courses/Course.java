@@ -1,6 +1,7 @@
 package courses;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -19,8 +20,8 @@ public class Course implements Updatable {
 	private String title; // required
 	private final LocalDate start; // automatically generation when course is created
 	private Admin lecturer; // required!
-	private Set<User> students; // elements in it are optional but memory must be allocated //map<username,
-								// integer>
+	private Map<User, Float> students; // elements in it are optional but memory must be allocated //map<username,
+	// integer>
 	private Map<String, Set<Document>> sections; // elements in it are optional but memory must be allocated
 
 	Course(String title, Admin lecturer) {
@@ -28,7 +29,7 @@ public class Course implements Updatable {
 		this.title = title;
 		this.lecturer = lecturer;
 		this.start = LocalDate.now();
-		this.students = new HashSet<User>();
+		this.students = new HashMap<User, Float>();
 		this.sections = new LinkedHashMap<String, Set<Document>>();
 
 	}
@@ -68,12 +69,12 @@ public class Course implements Updatable {
 			throw new NullObjectException("Invalid user!");
 		}
 
-		if (this.students.contains(user)) {
+		if (this.students.containsKey(user)) {
 			System.out.println("User " + user.getUsername() + " is already in " + this.getTitle() + " course.");
 			return;
 		}
 
-		this.students.add(user);
+		this.students.put(user, 0f);
 	}
 
 	@Override
@@ -168,10 +169,6 @@ public class Course implements Updatable {
 	// generate getters and setters for everything if we don't need them we will
 	// remove them
 
-	public String getTitle() {
-		return this.title;
-	}
-
 	public LocalDate getStart() {
 		return start;
 	}
@@ -180,65 +177,23 @@ public class Course implements Updatable {
 		return lecturer;
 	}
 
-	// try methods
+	private String getTitle() {
+		return this.title;
+	}
 
-//	public static void main(String[] args) {
-//		try {
-//			Course c = Course.getInstance("Java EE", new Admin("Petur"));
-//
-//			UsersStorage.getInstance().add(new User("deniz.mehmed")); za da testvash napravi add public
-//			UsersStorage.getInstance().add(new User("ivo.kovachev"));
-//			UsersStorage.getInstance().add(new User("nikolay.tomitov"));
-//			UsersStorage.getInstance().add(new User("krasimir.stoev"));
-//
-//			c.addMember("deniz.mehmed");
-//			c.addMember("ivo.kovachev");
-//			c.addMember("nikolay.tomitov");
-//			c.addMember("krasimir.stoev");
-//			c.addMember("krasimir.stoev");
-//
-//			System.out.println(c.students.size());
-//
-//			for (User user : c.students) {
-//				System.out.println(user);
-//			}
-//
-//			System.out.println();
-//			c.removeMember(null);
-//			System.out.println("---------------------------");
-//
-//			c.removeMember("deniz.mehmed");
-//			System.out.println();
-//
-//			for (User user : c.students) {
-//				System.out.println(user);
-//			}
-//
-//			System.out.println("---------------------------");
-//			
-//			c.addSection("Lecture 1");
-//
-//			c.addSection("Lecture 3");
-//			c.addSection("Lecture 12");
-//			c.addSection("Lecture 13");
-//
-//			c.addDocument("Lecture 1", new Document("Deni.pdf", "D:\\Help"));
-//			c.addDocument("Lecture 1", new Document("Jeni.pdf", "D:\\Help"));
-//			c.addDocument("Lecture 3", new Document("Kemi.pdf", "D:\\Help"));
-//
-//			c.addDocument("Lecture 12", new Document("Deni.pdf", "D:\\Help"));
-//			c.addDocument("Lecture 12", new Document("Jeni.pdf", "D:\\Help"));
-//			c.addDocument("Lecture 13", new Document("Kemi.pdf", "D:\\Help"));
-//
-//			c.view();
-//		} catch (NameException e) {
-//			e.printStackTrace();
-//		} catch (NullObjectException e) {
-//			e.printStackTrace();
-//		} catch (ObjectCreationException e) {
-//			e.printStackTrace();
-//		}
-//
-//	}
+	@Override
+	public void viewParticipants() {
+
+		System.out.println("Admin: " + this.lecturer);
+		for (User student : this.students.keySet()) {
+			System.out.println("Student: " + student);
+		}
+
+	}
+
+	@Override
+	public void viewGrade(User user) {
+		System.out.printf("Your grade is %.2f", this.students.get(user));
+	}
 
 }

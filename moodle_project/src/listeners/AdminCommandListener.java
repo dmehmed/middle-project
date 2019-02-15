@@ -1,20 +1,34 @@
 package listeners;
 
-public class AdminCommandListener extends CommandListener {
+import system.WebSystem;
+import users.Admin;
+import users.User;
 
-	private static CommandListener instance = null;
+public class AdminCommandListener extends ActiveProfileListener {
 
-	public static CommandListener getInstance() {
+	private static final int ADD_PARTICIPANT_IN_COURSE = 5;
+	private static final int REMOVE_PARTICIPANT_IN_COURSE = 6;
+	private static final int LOG_OUT = 6;
+
+	private static ActiveProfileListener instance = null;
+	private Admin admin = null;
+
+	public static ActiveProfileListener getInstance() {
 		if (AdminCommandListener.instance == null) {
-			AdminCommandListener.instance = new GuestCommandListener();
+			AdminCommandListener.instance = new AdminCommandListener();
 		}
 		return AdminCommandListener.instance;
 	}
 
 	@Override
+	public void setUser(User user) {
+		this.admin = (Admin) user;
+	}
+
+	@Override
 	public void showMenu() {
 
-		System.out.println("User menu:");
+		System.out.println("User menu:\n");
 		System.out.println("1 - View profile");
 		System.out.println("2 - View my courses");
 		System.out.println("3 - View course");
@@ -33,7 +47,35 @@ public class AdminCommandListener extends CommandListener {
 
 	@Override
 	public void execute(int command) {
-		// TODO Auto-generated method stub
+
+		String courseName = null;
+
+		switch (command) {
+		case ActiveProfileListener.VIEW_PROFILE:
+			this.admin.viewProfileInfo();
+			return;
+		case ActiveProfileListener.VIEW_COURSES:
+			this.admin.listCourses();
+			return;
+		case ActiveProfileListener.VIEW_COURSE_INFO:
+			System.out.println("Enter course name:");
+			courseName = WebSystem.getScanner().nextLine();
+			this.admin.viewCourseInfo(courseName);
+			return;
+		case ActiveProfileListener.VIEW_PARTICIPANTS_IN_COURSE:
+			System.out.println("Enter course name:");
+			courseName = WebSystem.getScanner().nextLine();
+			this.admin.viewParticipantsInCourse(courseName);
+			return;
+		case AdminCommandListener.LOG_OUT:
+			this.admin.setOffline();
+			this.setUser(null);
+			WebSystem.getInstance().setListener(GuestCommandListener.getInstance());
+			return;
+		default:
+			System.out.println("Invalid command!");
+			return;
+		}
 
 	}
 

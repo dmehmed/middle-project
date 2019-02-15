@@ -64,6 +64,10 @@ public class WebSystem implements IWebSystem {
 		this.listener = listener;
 	}
 
+	public static Scanner getScanner() {
+		return WebSystem.scanner;
+	}
+
 	public User logUser() {
 
 		System.out.println("Entry your username:");

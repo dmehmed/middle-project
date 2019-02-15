@@ -39,8 +39,10 @@ public class GuestCommandListener extends CommandListener {
 
 			if (Helper.isValid(user)) {
 				if (user instanceof User) {
+					UserCommandListener.getInstance().setUser(user);
 					WebSystem.getInstance().setListener(UserCommandListener.getInstance());
 				} else {
+					AdminCommandListener.getInstance().setUser(user);
 					WebSystem.getInstance().setListener(AdminCommandListener.getInstance());
 				}
 			}
