@@ -19,7 +19,8 @@ public class Course implements Updatable {
 	private String title; // required
 	private final LocalDate start; // automatically generation when course is created
 	private Admin lecturer; // required!
-	private Set<User> students; // elements in it are optional but memory must be allocated
+	private Set<User> students; // elements in it are optional but memory must be allocated //map<username,
+								// integer>
 	private Map<String, Set<Document>> sections; // elements in it are optional but memory must be allocated
 
 	Course(String title, Admin lecturer) {
