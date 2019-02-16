@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Set;
 
 import courses.Course;
+import exceptions.NullObjectException;
 
 public class CoursesStorage {
 
@@ -45,6 +46,14 @@ public class CoursesStorage {
 
 		if (!this.courses.containsKey(course)) {
 			this.courses.put("", course);
+			
+			JSONWriter writer = JSONWriter.getInstance();
+			try {
+				writer.writeObjectToJSONFile(course);
+			} catch (NullObjectException e) {
+				e.printStackTrace();
+			}
+			
 			return true;
 		} else {
 			return false;

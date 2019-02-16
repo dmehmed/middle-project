@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.google.gson.JsonElement;
+
+import exceptions.NullObjectException;
 import helper.Helper;
 import users.User;
 
@@ -11,6 +14,7 @@ public class UsersStorage {
 
 	private static UsersStorage storage = null;
 	private Map<String, User> users;
+	private JSONWriter writer = JSONWriter.getInstance();
 
 	private UsersStorage() {
 		this.users = new HashMap<String, User>();
@@ -59,6 +63,11 @@ public class UsersStorage {
 		}
 
 		this.users.put(newUser.getUsername(), newUser);
+		try {
+			writer.writeObjectToJSONFile(newUser);
+		} catch (NullObjectException e) {
+			e.printStackTrace();
+		}
 	}
 
 	boolean add(User user) {

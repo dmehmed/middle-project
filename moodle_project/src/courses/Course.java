@@ -85,7 +85,7 @@ public class Course implements Updatable {
 		// in method add we have validation for null user but we can return if user is
 		// null or collection doesn't contains it
 
-		if (!Helper.isValid(user) || !this.students.contains(user)) {
+		if (!Helper.isValid(user) || !this.students.containsKey(user)) {
 			return;
 		}
 
@@ -177,7 +177,7 @@ public class Course implements Updatable {
 		return lecturer;
 	}
 
-	private String getTitle() {
+	public String getTitle() {
 		return this.title;
 	}
 
