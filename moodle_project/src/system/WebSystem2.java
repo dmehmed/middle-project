@@ -40,8 +40,8 @@ public class WebSystem2 implements IWebSystem {
 
 		try {
 
-			this.usersStorage.loadData();
-			this.coursesStorage.loadData();
+			this.usersStorage.loadUSersDataFromJSONFile();
+			this.coursesStorage.loadCoursesDataFromJSONFile();
 
 			int command;
 

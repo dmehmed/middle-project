@@ -28,6 +28,7 @@ public class UsersStorage {
 	private static UsersStorage storage = null;
 	private Map<String, User> users;
 	private JSONWriter writer = JSONWriter.getInstance();
+	private JSONReader reader = JSONReader.getInstance();
 
 	private UsersStorage() {
 		this.users = new HashMap<String, User>();
@@ -39,28 +40,6 @@ public class UsersStorage {
 			UsersStorage.storage = new UsersStorage();
 		}
 		return UsersStorage.storage;
-	}
-
-	
-	public void loadData() {
-		Gson gson = new GsonBuilder().create();
-		
-		File file = new File(".\\users_json_files\\users.json");
-		if(!file.exists()) {
-			return;
-		}
-		
-		try (BufferedReader buffer = new BufferedReader(new InputStreamReader(
-				new FileInputStream(file))))
-		{	
-			Type type = new TypeToken<Map<String, User>>(){}.getType();
-			this.users = gson.fromJson(buffer, type);
-			
-		} catch (IOException e1) {
-			System.out.println("Something's gone wrong with file!");
-			return;
-		}	
-		
 	}
 	
 	
@@ -99,17 +78,20 @@ public class UsersStorage {
 		}
 
 		this.users.put(newUser.getUsername(), newUser);
-//		try {
-//			writer.writeObjectToJSONFile(newUser);
-//		} catch (NullObjectException e) {
-//			e.printStackTrace();
-//		}
 	}
 
 	public void saveUsersDataToJSONFile() {
 		try {
 			this.writer.writeObjectToJSONFile(this.users);
 			System.out.println("Successful user registration!");
+		} catch (NullObjectException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void loadUSersDataFromJSONFile() {
+		try {
+			this.users = this.reader.loadUsersData();
 		} catch (NullObjectException e) {
 			e.printStackTrace();
 		}

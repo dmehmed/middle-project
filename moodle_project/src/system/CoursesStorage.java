@@ -27,6 +27,7 @@ public class CoursesStorage {
 	private static CoursesStorage instance = null;
 	private Map<String, Course> courses;
 	private JSONWriter writer = JSONWriter.getInstance();
+	private JSONReader reader = JSONReader.getInstance();
 
 	private CoursesStorage() {
 		this.courses = new HashMap<String, Course>();
@@ -48,23 +49,12 @@ public class CoursesStorage {
 		}
 	}
 
-	public void loadData() {
-		Gson gson = new GsonBuilder().create();
-
-		File file = new File(".\\courses_json_files\\courses.json");
-		if (!file.exists()) {
-			return;
+	public void loadCoursesDataFromJSONFile() {	
+		try {
+			this.courses = this.reader.loadCoursesData();
+		} catch (NullObjectException e) {
+			e.printStackTrace();
 		}
-
-		try (BufferedReader buffer = new BufferedReader(new InputStreamReader(new FileInputStream(file)))) {
-
-			Type type = new TypeToken<Map<String, Course>>() {
-			}.getType();
-			this.courses = gson.fromJson(buffer, type);
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-
 	}
 
 	public Course getCourse(String course) {
