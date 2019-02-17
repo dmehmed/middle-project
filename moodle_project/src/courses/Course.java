@@ -37,6 +37,11 @@ public class Course implements Updatable {
 
 	}
 
+	@Override
+	public String toString() {
+		return this.title;
+	}
+
 	// it is not necessary to have factory method
 	public static Course getInstance(String title, Admin lecturer) throws NullObjectException, NameException {
 		if (!Helper.isValid(title)) {

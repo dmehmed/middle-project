@@ -13,6 +13,7 @@ public class User {
 
 	static int MIN_LENGTH_PASSWORD = 6;
 
+	private boolean isAdmin;
 	private final String username; // required
 	private String password; // required
 	private String firstName; // required
@@ -22,12 +23,18 @@ public class User {
 	protected Set<Course> courses; // sorted by day of creation from new to old
 
 	User(String username, String password, String firstName, String surname, Address address) {
+		this.isAdmin = false;
 		this.username = username;
 		this.password = password;
 		this.firstName = firstName;
 		this.surname = surname;
 		this.address = address;
-		this.courses = new TreeSet<Course>();
+		this.courses = new TreeSet<Course>((c1, c2) -> {
+			if (c1.getStart().equals(c2.getStart())) {
+				return c1.getTitle().compareTo(c2.getTitle());
+			}
+			return c1.getStart().compareTo(c2.getStart());
+		});
 	}
 
 	public void viewProfileInfo() {
@@ -169,4 +176,11 @@ public class User {
 
 	}
 
+	public boolean isAdmin() {
+		return this.isAdmin;
+	}
+
+	protected void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
+	}
 }
