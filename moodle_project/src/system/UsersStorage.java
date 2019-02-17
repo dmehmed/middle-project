@@ -1,10 +1,20 @@
 package system;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
 import exceptions.NullObjectException;
 import helper.Helper;
@@ -20,14 +30,36 @@ public class UsersStorage {
 		this.users = new HashMap<String, User>();
 	}
 
+	
 	public static UsersStorage getInstance() {
 		if (UsersStorage.storage == null) {
 			UsersStorage.storage = new UsersStorage();
 		}
-
 		return UsersStorage.storage;
 	}
 
+	
+	public void loadData() {
+		Gson gson = new GsonBuilder().create();
+		
+		try (BufferedReader buffer = new BufferedReader(new InputStreamReader(
+				new FileInputStream(
+						new File(".\\users_json_files\\users.json")))))
+		{
+			
+			this.users = gson.fromJson(buffer, Map.class);
+			//System.out.println(user.toString());
+			//this.users.put(user.getUsername(), user);
+			
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		
+		
+		
+	}
+	
+	
 	public User getUser(String username) {
 
 		if (!this.users.containsKey(username)) {
@@ -63,13 +95,21 @@ public class UsersStorage {
 		}
 
 		this.users.put(newUser.getUsername(), newUser);
+//		try {
+//			writer.writeObjectToJSONFile(newUser);
+//		} catch (NullObjectException e) {
+//			e.printStackTrace();
+//		}
+	}
+
+	public void saveUsersDataToJSONFile() {
 		try {
-			writer.writeObjectToJSONFile(newUser);
+			this.writer.writeObjectToJSONFile(this.users);
 		} catch (NullObjectException e) {
 			e.printStackTrace();
 		}
 	}
-
+	
 	boolean add(User user) {
 		if (user == null) {
 			return false;

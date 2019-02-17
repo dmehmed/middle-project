@@ -18,7 +18,7 @@ public class User {
 	private String surname; // required
 	private Address address; // optional
 	private boolean isOnline; // automatically generated
-	private Set<Viewable> courses; // sorted by day of creation from new to old
+	protected Set<Course> courses; // sorted by day of creation from new to old
 
 	User(String username, String password, String firstName, String surname, Address address) {
 		this.username = username;
@@ -26,7 +26,7 @@ public class User {
 		this.firstName = firstName;
 		this.surname = surname;
 		this.address = address;
-		this.courses = new TreeSet<Viewable>();
+		this.courses = new TreeSet<Course>();
 	}
 
 	public void viewProfileInfo() {

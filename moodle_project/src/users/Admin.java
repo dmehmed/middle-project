@@ -10,11 +10,11 @@ import system.CoursesStorage;
 
 public class Admin extends User {
 
-	private Set<Updatable> courses;
+	//private Set<Course> courses;
 
 	Admin(String username, String password, String firstName, String surname, Address address) {
 		super(username, password, firstName, surname, address);
-		this.courses = new TreeSet<Updatable>();
+		//this.courses = new TreeSet<Course>();
 	}
 
 	public void viewProfileInfo() {
@@ -25,7 +25,7 @@ public class Admin extends User {
 
 		System.out.println("My courses: ");
 
-		for (Viewable course : this.courses) {
+		for (Viewable course : super.courses) {
 			System.out.println(course);
 		}
 
@@ -37,7 +37,7 @@ public class Admin extends User {
 
 			Course c = CoursesStorage.getInstance().getCourse(course);
 
-			for (Viewable cs : this.courses) {
+			for (Viewable cs : super.courses) {
 				if (cs.equals(c)) {
 					cs.view();
 					return;
@@ -53,7 +53,7 @@ public class Admin extends User {
 
 			Course c = CoursesStorage.getInstance().getCourse(course);
 
-			for (Viewable cs : this.courses) {
+			for (Viewable cs : super.courses) {
 				if (cs.equals(c)) {
 					cs.viewParticipants();
 					return;
@@ -70,7 +70,7 @@ public class Admin extends User {
 			return false;
 		}
 
-		if (!this.courses.contains(c)) {
+		if (!super.courses.contains(c)) {
 			System.out.println("You are not allowed to view this course!");
 			return false;
 		}

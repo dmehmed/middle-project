@@ -1,8 +1,10 @@
 package system;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Map;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -31,20 +33,16 @@ public class JSONWriter {
 	}
 	
 	
-	public void writeObjectToJSONFile(Object object) throws NullObjectException {
+	public void writeObjectToJSONFile(Map<String, User> users) throws NullObjectException {
 		
-		if(!Helper.isValid(object)) {
+		if(!Helper.isValid(users)) {
 			throw new NullObjectException("Invalid object given!");
 		}
 		
 		File file = null;
-		if(object instanceof User) {
-			file = new File(".\\users_json_files\\" + ((User) object).getUsername() + ".json");
-		} else if(object instanceof Admin) {
-			file = new File(".\\admins_json_files\\" + ((Admin) object).getUsername() + ".json");
-		} else {
-			file = new File(".\\courses_json_files\\" + ((Course) object).getTitle() + ".json");
-		}
+			file = new File(".\\users_json_files\\users.json");
+ 
+		
 		
 		if(!file.exists()) {
 			try {
@@ -55,8 +53,8 @@ public class JSONWriter {
 		}
 		
 
-		try (PrintWriter writer = new PrintWriter(file)) {
-		    this.gson.toJson(object, writer);
+		try (PrintWriter writer = new PrintWriter(new FileOutputStream(file), true)) {
+		    this.gson.toJson(users, writer);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

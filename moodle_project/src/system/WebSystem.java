@@ -39,6 +39,8 @@ public class WebSystem implements IWebSystem {
 	@Override
 	public void start() {
 
+		this.usersStorage.loadData();
+		
 		int command;
 
 		do {
@@ -48,6 +50,7 @@ public class WebSystem implements IWebSystem {
 			command = scanner.nextInt();
 
 			if (command == WebSystem.EXIT_SYSTEM_COMMAND) {
+				this.usersStorage.saveUsersDataToJSONFile();
 				return;
 			}
 

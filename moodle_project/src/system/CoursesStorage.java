@@ -12,7 +12,8 @@ public class CoursesStorage {
 
 	private static CoursesStorage instance = null;
 	private Map<String, Course> courses;
-
+	private JSONWriter writer = JSONWriter.getInstance();
+	
 	private CoursesStorage() {
 		this.courses = new HashMap<String, Course>();
 	}
@@ -47,9 +48,8 @@ public class CoursesStorage {
 		if (!this.courses.containsKey(course)) {
 			this.courses.put("", course);
 			
-			JSONWriter writer = JSONWriter.getInstance();
 			try {
-				writer.writeObjectToJSONFile(course);
+				this.writer.writeObjectToJSONFile(course);
 			} catch (NullObjectException e) {
 				e.printStackTrace();
 			}
@@ -58,6 +58,8 @@ public class CoursesStorage {
 		} else {
 			return false;
 		}
+		
+
 	}
 
 	boolean remove(Course course) {
