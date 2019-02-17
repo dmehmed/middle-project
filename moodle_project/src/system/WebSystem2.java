@@ -39,6 +39,7 @@ public class WebSystem2 implements IWebSystem {
 	public void start() {
 
 		this.usersStorage.loadData();
+		this.coursesStorage.loadData();
 		
 		int command;
 
@@ -50,6 +51,7 @@ public class WebSystem2 implements IWebSystem {
 
 			if (command == WebSystem2.EXIT_SYSTEM_COMMAND) {
 				this.usersStorage.saveUsersDataToJSONFile();
+				this.coursesStorage.saveCoursesDataToJSONFile();
 				return;
 			}
 

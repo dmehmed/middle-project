@@ -20,7 +20,7 @@
       "country": "bulgaria",
       "city": "sofia"
     },
-    "isOnline": true,
+    "isOnline": false,
     "courses": []
   }
 }
