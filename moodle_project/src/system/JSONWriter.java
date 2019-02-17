@@ -63,4 +63,35 @@ public class JSONWriter {
 
 	}
 
+
+
+public void writeCoursesToJSONFile(Map<String, Course> courses) throws NullObjectException {
+	
+	if(!Helper.isValid(courses)) {
+		throw new NullObjectException("Invalid object given!");
+	}
+
+	File file = null;
+
+		file = new File(".\\courses_json_files\\courses.json");
+
+	
+		if (!file.exists()) {
+			try {
+				file.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+
+	try (PrintWriter writer = new PrintWriter(new FileOutputStream(file), true)) {
+	    this.gson.toJson(courses, writer);
+
+	} catch (IOException e) {
+		e.printStackTrace();
+	}
+
+}
+
 }

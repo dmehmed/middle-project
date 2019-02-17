@@ -45,18 +45,17 @@ public class UsersStorage {
 	public void loadData() {
 		Gson gson = new GsonBuilder().create();
 		
+		File file = new File(".\\users_json_files\\users.json");
+		if(!file.exists()) {
+			return;
+		}
+		
 		try (BufferedReader buffer = new BufferedReader(new InputStreamReader(
 				new FileInputStream(
-						new File(".\\users_json_files\\users.json")))))
+						file))))
 		{
-			
 			Type type = new TypeToken<Map<String, User>>(){}.getType();
 			this.users = gson.fromJson(buffer, type);
-			//System.out.println(user.toString());
-			//this.users.put(user.getUsername(), user);
-			for(Entry<String, User> e : this.users.entrySet()) {
-				System.out.println(e.getKey() + " " + e.getValue());
-			}
 			
 		} catch (IOException e1) {
 			e1.printStackTrace();

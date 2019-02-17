@@ -1,12 +1,24 @@
 package system;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.Map.Entry;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 import courses.Course;
 import exceptions.NullObjectException;
+import users.User;
 
 public class CoursesStorage {
 
@@ -26,6 +38,36 @@ public class CoursesStorage {
 		return CoursesStorage.instance;
 	}
 
+	public void saveCoursesDataToJSONFile() {
+		try {
+			this.writer.writeCoursesToJSONFile(this.courses);
+		} catch (NullObjectException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void loadData() {
+		Gson gson = new GsonBuilder().create();
+		
+		File file = new File(".\\courses_json_files\\courses.json");
+		if(!file.exists()) {
+			return;
+		}
+		
+		try (BufferedReader buffer = new BufferedReader(new InputStreamReader(
+				new FileInputStream(
+						file))))
+		{
+			
+			Type type = new TypeToken<Map<String, Course>>(){}.getType();
+			this.courses = gson.fromJson(buffer, type);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}	
+		
+	}
+	
+	
 	public Course getCourse(String course) {
 		if (!this.courses.containsKey(course)) {
 			System.out.println("There is no such course in system!");
