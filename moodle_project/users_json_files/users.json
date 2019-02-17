@@ -8,7 +8,7 @@
       "country": "bulgaria",
       "city": "sofia"
     },
-    "isOnline": false,
+    "isOnline": true,
     "courses": []
   },
   "pesho_peshev": {
@@ -32,7 +32,7 @@
       "country": "Bulgaria",
       "city": "Gabrovo"
     },
-    "isOnline": true,
+    "isOnline": false,
     "courses": []
   }
 }
