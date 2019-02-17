@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>moodle_project</groupId>
   <artifactId>moodle_project</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>1</version>
   <build>
     <sourceDirectory>src</sourceDirectory>
     <plugins>
@@ -31,4 +31,5 @@
   		</dependency>
   	</dependencies>
   </dependencyManagement>
-</project>
+
+	</project>
