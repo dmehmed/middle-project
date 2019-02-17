@@ -119,6 +119,8 @@ public class WebSystem2 implements IWebSystem {
 
 		User newUser = UserBuilder.createUser(isAdmin, username, password, firstName, surname, country, city);
 		this.usersStorage.addUser(newUser);
+
+		System.out.println("Your registration was successful!");
 	}
 
 	public void showCourses() {

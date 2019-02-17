@@ -51,14 +51,14 @@ public class UsersStorage {
 		}
 		
 		try (BufferedReader buffer = new BufferedReader(new InputStreamReader(
-				new FileInputStream(
-						file))))
-		{
+				new FileInputStream(file))))
+		{	
 			Type type = new TypeToken<Map<String, User>>(){}.getType();
 			this.users = gson.fromJson(buffer, type);
 			
 		} catch (IOException e1) {
-			e1.printStackTrace();
+			System.out.println("Something's gone wrong with file!");
+			return;
 		}	
 		
 	}

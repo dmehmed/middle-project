@@ -23,16 +23,16 @@
     "isOnline": false,
     "courses": []
   },
-  "gosho_goshev": {
-    "username": "gosho_goshev",
-    "password": "123456",
-    "firstName": "gosho",
-    "surname": "goshev",
+  "nikolaytomitov": {
+    "username": "nikolaytomitov",
+    "password": "vurzaMi123",
+    "firstName": "Nikolay",
+    "surname": "Tomitov",
     "address": {
-      "country": "bulgaria",
-      "city": "sofia"
+      "country": "Bulgaria",
+      "city": "Gabrovo"
     },
-    "isOnline": false,
+    "isOnline": true,
     "courses": []
   }
 }
