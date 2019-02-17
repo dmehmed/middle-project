@@ -2,6 +2,7 @@ package listeners;
 
 import helper.Helper;
 import system.WebSystem2;
+import users.Admin;
 import users.User;
 
 public class GuestCommandListener extends CommandListener {
@@ -38,12 +39,13 @@ public class GuestCommandListener extends CommandListener {
 			User user = WebSystem2.getInstance().logUser();
 
 			if (Helper.isValid(user)) {
-				if (user instanceof User) {
-					UserCommandListener.getInstance().setUser(user);
-					WebSystem2.getInstance().setListener(UserCommandListener.getInstance());
-				} else {
+				if (user instanceof Admin) {
 					AdminCommandListener.getInstance().setUser(user);
 					WebSystem2.getInstance().setListener(AdminCommandListener.getInstance());
+					
+				} else {
+					UserCommandListener.getInstance().setUser(user);
+					WebSystem2.getInstance().setListener(UserCommandListener.getInstance());
 				}
 			}
 

@@ -38,7 +38,7 @@ public class WebSystem2 implements IWebSystem {
 	@Override
 	public void start() {
 
-		//this.usersStorage.loadData();
+		this.usersStorage.loadData();
 		
 		int command;
 

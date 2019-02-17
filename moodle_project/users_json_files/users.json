@@ -1,1 +1,26 @@
-{"ivo_kovachev":{"username":"ivo_kovachev","password":"123456","firstName":"ivo","surname":"kovachev","address":{"country":"bulgaria","city":"sofia"},"isOnline":true,"courses":[]}}
+{
+  "ivo_kovachev": {
+    "username": "ivo_kovachev",
+    "password": "123456",
+    "firstName": "ivo",
+    "surname": "kovachev",
+    "address": {
+      "country": "bulgaria",
+      "city": "sofia"
+    },
+    "isOnline": false,
+    "courses": []
+  },
+  "pesho_peshev": {
+    "username": "pesho_peshev",
+    "password": "123456",
+    "firstName": "pesho",
+    "surname": "peshev",
+    "address": {
+      "country": "bulgaria",
+      "city": "sofia"
+    },
+    "isOnline": true,
+    "courses": []
+  }
+}

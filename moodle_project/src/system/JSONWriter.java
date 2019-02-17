@@ -21,7 +21,7 @@ public class JSONWriter {
 	private Gson gson;
 
 	private JSONWriter() {
-		this.gson = new GsonBuilder().create();
+		this.gson = new GsonBuilder().setPrettyPrinting().create();
 	}
 
 	public static JSONWriter getInstance() {
@@ -52,9 +52,6 @@ public class JSONWriter {
 					e.printStackTrace();
 				}
 			}
-
-			
-
 
 
 		try (PrintWriter writer = new PrintWriter(new FileOutputStream(file), true)) {

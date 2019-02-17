@@ -1,5 +1,8 @@
 package system;
 
+import java.lang.reflect.Type;
+import com.google.gson.reflect.TypeToken;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -39,25 +42,27 @@ public class UsersStorage {
 	}
 
 	
-//	public void loadData() {
-//		Gson gson = new GsonBuilder().create();
-//		
-//		try (BufferedReader buffer = new BufferedReader(new InputStreamReader(
-//				new FileInputStream(
-//						new File(".\\users_json_files\\users.json")))))
-//		{
-//			
-//			this.users = gson.fromJson(buffer, Map.class);
-//			//System.out.println(user.toString());
-//			//this.users.put(user.getUsername(), user);
-//			
-//		} catch (IOException e1) {
-//			e1.printStackTrace();
-//		}
-//		
+	public void loadData() {
+		Gson gson = new GsonBuilder().create();
 		
+		try (BufferedReader buffer = new BufferedReader(new InputStreamReader(
+				new FileInputStream(
+						new File(".\\users_json_files\\users.json")))))
+		{
+			
+			Type type = new TypeToken<Map<String, User>>(){}.getType();
+			this.users = gson.fromJson(buffer, type);
+			//System.out.println(user.toString());
+			//this.users.put(user.getUsername(), user);
+			for(Entry<String, User> e : this.users.entrySet()) {
+				System.out.println(e.getKey() + " " + e.getValue());
+			}
+			
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}	
 		
-	//}
+	}
 	
 	
 	public User getUser(String username) {
