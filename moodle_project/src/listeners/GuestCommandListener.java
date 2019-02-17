@@ -28,7 +28,7 @@ public class GuestCommandListener extends CommandListener {
 		System.out.println("Choose option:\n");
 		System.out.println("1 - Log in");
 		System.out.println("2 - Create new account");
-		System.out.println("3 - View course categories\n");
+		System.out.println("3 - View courses\n");
 		System.out.println("0 - Exit");
 
 	}
