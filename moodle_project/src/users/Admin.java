@@ -15,7 +15,7 @@ public class Admin extends User {
 	}
 
 	public void createCourse() {
-		System.out.println("\nEnter name of course:");
+		System.out.println("Enter name of course:");
 		WebSystem2.getScanner().nextLine();
 		String name = WebSystem2.getScanner().nextLine();
 

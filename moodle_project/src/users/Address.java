@@ -1,9 +1,5 @@
 package users;
 
-import exceptions.NameException;
-import exceptions.ObjectCreationException;
-import helper.Helper;
-
 public class Address {
 
 	private String country; // optional
@@ -28,15 +24,15 @@ public class Address {
 
 	@Override
 	public String toString() {
-		return (this.country != null ? this.country : "") + (this.country != null && this.city != null ? ", " : "")
-				+ (this.city != null ? this.city : "");
+		return (this.city != null ? this.city : "") + (this.country != null && this.city != null ? ", " : "")
+				+ (this.country != null ? this.country : "");
 	}
 
-	private void setCountry(String country) {
+	void setCountry(String country) {
 		this.country = country;
 	}
 
-	private void setCity(String city) {
+	void setCity(String city) {
 		this.city = city;
 	}
 

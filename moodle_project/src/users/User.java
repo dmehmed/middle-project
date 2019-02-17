@@ -8,8 +8,15 @@ import courses.Course;
 import courses.Viewable;
 import helper.Helper;
 import system.CoursesStorage;
+import system.WebSystem2;
 
 public class User {
+
+	private static final int FIRST_NAME_CHANGE = 1;
+	private static final int SURNAME_CHANGE = 2;
+	private static final int PASSWORD_CHANGE = 3;
+	private static final int COUNTRY_CHANGE = 4;
+	private static final int CITY_CHANGE = 5;
 
 	static int MIN_LENGTH_PASSWORD = 6;
 
@@ -124,7 +131,7 @@ public class User {
 
 		return true;
 	}
-	
+
 	public void removeCourse(Course course) {
 
 		for (Iterator<Course> it = this.courses.iterator(); it.hasNext();) {
@@ -182,5 +189,93 @@ public class User {
 
 	protected void setAdmin(boolean isAdmin) {
 		this.isAdmin = isAdmin;
+	}
+
+	public void update() {
+
+		System.out.println("Choose option:\n");
+		System.out.println("1 - Change first name");
+		System.out.println("2 - Change surname");
+		System.out.println("3 - Change password");
+		System.out.println("4 - Change country");
+		System.out.println("5 - Change city");
+
+		int command = WebSystem2.getScanner().nextInt();
+
+		String update = null;
+
+		switch (command) {
+		case FIRST_NAME_CHANGE:
+			System.out.println("Enter new first name:");
+			update = WebSystem2.getScanner().next();
+
+			if (Helper.isValid(update)) {
+				this.firstName = update;
+				System.out.println("You have successfully edited your profile!");
+				return;
+			}
+
+			System.out.println("Invalid input!");
+			return;
+
+		case SURNAME_CHANGE:
+			System.out.println("Enter new surname:");
+			update = WebSystem2.getScanner().next();
+
+			if (Helper.isValid(update)) {
+				this.surname = update;
+				System.out.println("You have successfully edited your profile!");
+				return;
+			}
+
+			System.out.println("Invalid input!");
+			return;
+
+		case PASSWORD_CHANGE:
+			System.out.println("Enter new password:");
+			update = WebSystem2.getScanner().next();
+
+			if (Helper.isValid(update) && update.length() >= User.MIN_LENGTH_PASSWORD) {
+				this.password = update;
+				System.out.println("You have successfully edited your profile!");
+				return;
+			}
+
+			System.out.println("Invalid input!");
+			return;
+
+		case COUNTRY_CHANGE:
+			System.out.println("Enter new country:");
+			WebSystem2.getScanner().nextLine();
+			update = WebSystem2.getScanner().nextLine();
+
+			if (Helper.isValid(update)) {
+				this.address.setCountry(update);
+				System.out.println("You have successfully edited your profile!");
+				return;
+			}
+
+			System.out.println("Invalid input!");
+			return;
+
+		case CITY_CHANGE:
+			System.out.println("Enter new city:");
+			WebSystem2.getScanner().nextLine();
+			update = WebSystem2.getScanner().nextLine();
+
+			if (Helper.isValid(update)) {
+				this.address.setCity(update);
+				System.out.println("You have successfully edited your profile!");
+				return;
+			}
+
+			System.out.println("Invalid input!");
+			return;
+
+		default:
+			System.out.println("Invalid input!");
+			return;
+		}
+
 	}
 }

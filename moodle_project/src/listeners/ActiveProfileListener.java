@@ -4,15 +4,14 @@ import exceptions.NameException;
 import exceptions.NullObjectException;
 import system.CoursesStorage;
 import system.WebSystem2;
-import users.Admin;
 import users.User;
 
 public abstract class ActiveProfileListener extends CommandListener {
 
 	protected static final int VIEW_PROFILE = 1;
-	protected static final int VIEW_COURSES = 2;
-	protected static final int CHOOSE_COURSE = 3;
-	protected static final int VIEW_PARTICIPANTS_IN_COURSE = 4;
+	protected static final int EDIT_PROFILE = 2;
+	protected static final int VIEW_COURSES = 3;
+	protected static final int CHOOSE_COURSE = 4;
 
 	private static User user;
 
@@ -32,6 +31,9 @@ public abstract class ActiveProfileListener extends CommandListener {
 		switch (command) {
 		case ActiveProfileListener.VIEW_PROFILE:
 			ActiveProfileListener.user.viewProfileInfo();
+			return;
+		case ActiveProfileListener.EDIT_PROFILE:
+			ActiveProfileListener.user.update();
 			return;
 		case ActiveProfileListener.VIEW_COURSES:
 			ActiveProfileListener.user.listCourses();

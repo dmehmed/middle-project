@@ -14,7 +14,7 @@ import com.google.gson.reflect.TypeToken;
 
 import courses.Course;
 import exceptions.NullObjectException;
-import helper.Helper;
+
 import users.User;
 
 public class JSONReader {
@@ -66,7 +66,7 @@ public class JSONReader {
 			Type type = new TypeToken<Map<String, Course>>() {}.getType();
 			return gson.fromJson(buffer, type);
 		} catch (IOException e1) {
-			e1.printStackTrace();
+			System.out.println("Something's gone wrong with file!");
 			return null;
 		}
 	}

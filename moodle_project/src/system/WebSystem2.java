@@ -2,11 +2,9 @@ package system;
 
 import java.util.Scanner;
 
-import courses.Course;
 import helper.Helper;
 import listeners.CommandListener;
 import listeners.GuestCommandListener;
-import users.Address;
 import users.User;
 import users.UserBuilder;
 
@@ -63,6 +61,7 @@ public class WebSystem2 implements IWebSystem {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.println("Something's gone wrong...");
 		}
 	}
 
