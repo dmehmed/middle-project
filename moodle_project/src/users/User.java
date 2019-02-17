@@ -124,6 +124,18 @@ public class User {
 
 		return true;
 	}
+	
+	public void removeCourse(Course course) {
+
+		for (Iterator<Course> it = this.courses.iterator(); it.hasNext();) {
+			Course currentCourse = it.next();
+			if (currentCourse.equals(course)) {
+				it.remove();
+				return;
+			}
+		}
+
+	}
 
 	@Override
 	public String toString() {
@@ -162,18 +174,6 @@ public class User {
 
 	public void addCourse(Course course) {
 		this.courses.add(course);
-	}
-
-	public void removeCourse(Course course) {
-
-		for (Iterator<Course> it = this.courses.iterator(); it.hasNext();) {
-			Course currentCourse = it.next();
-			if (currentCourse.equals(course)) {
-				it.remove();
-				return;
-			}
-		}
-
 	}
 
 	public boolean isAdmin() {
