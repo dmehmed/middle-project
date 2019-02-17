@@ -65,6 +65,7 @@ public class UsersStorage {
 		this.users.put(newUser.getUsername(), newUser);
 		try {
 			writer.writeObjectToJSONFile(newUser);
+			System.out.println("Successful user registration!");
 		} catch (NullObjectException e) {
 			e.printStackTrace();
 		}
@@ -107,8 +108,8 @@ public class UsersStorage {
 		}
 	}
 
-	public boolean searchUser(String username) {
-		return this.users.containsKey(username);
+	public static boolean searchUser(String username) {
+		return UsersStorage.storage.users.containsKey(username);
 	}
 
 }

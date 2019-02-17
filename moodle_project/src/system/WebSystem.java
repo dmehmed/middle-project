@@ -13,7 +13,6 @@ import users.UserBuilder;
 public class WebSystem implements IWebSystem {
 
 	private static final int EXIT_SYSTEM_COMMAND = 0;
-	private static final String COMMAND_SKIP_OPTIONAL_FIELDS_REGISTRATION = "skip";
 
 	private static WebSystem systemInstance = null;
 	private UsersStorage usersStorage = null;
@@ -25,12 +24,12 @@ public class WebSystem implements IWebSystem {
 		this.usersStorage = UsersStorage.getInstance();
 		this.coursesStorage = CoursesStorage.getInstance();
 		this.listener = GuestCommandListener.getInstance();
+		WebSystem.scanner = new Scanner(System.in);
 	}
 
 	public static WebSystem getInstance() {
 		if (WebSystem.systemInstance == null) {
 			WebSystem.systemInstance = new WebSystem();
-			WebSystem.scanner = new Scanner(System.in);
 		}
 
 		return WebSystem.systemInstance;
@@ -99,80 +98,20 @@ public class WebSystem implements IWebSystem {
 		String firstName = scanner.next();
 		System.out.println("* Enter surname: ");
 		String surname = scanner.next();
+		scanner.nextLine();
 		System.out.println("Enter country:");
-		String country = scanner.next();
+		String country = scanner.nextLine();
 		System.out.println("Enter city:");
-		String city = scanner.next();
+		String city = scanner.nextLine();
 		System.out.println("Is this admin profile? Yes/No:");
 		String isAdmin = scanner.next();
 
-		if (!this.areRequiredFieldsValid(username, password, firstName, surname)) {
-			return;
-		}
-
-		if (this.usersStorage.searchUser(username)) {
-			System.out.println("There is user with this username");
-			return;
-		}
-
-		boolean isCountryFieldSkipped = country.equals(COMMAND_SKIP_OPTIONAL_FIELDS_REGISTRATION);
-		boolean isCityFieldSkipped = city.equals(COMMAND_SKIP_OPTIONAL_FIELDS_REGISTRATION);
-
-		Address userAddress = this.generateAddress(country, city, isCountryFieldSkipped, isCityFieldSkipped);
-
-		User newUser = UserBuilder.createUser(isAdmin, username, password, firstName, surname, userAddress);
-
+		User newUser = UserBuilder.createUser(isAdmin, username, password, firstName, surname, country, city);
 		this.usersStorage.addUser(newUser);
-		System.out.println("Successful user registration!");
-
 	}
 
 	public void showCourses() {
 		this.coursesStorage.listAllCourses();
-	}
-
-	private Address generateAddress(String country, String city, boolean isCountryFieldSkipped,
-			boolean isCityFieldSkipped) {
-
-		Address address = null;
-
-		if (!isCountryFieldSkipped) {
-			if (!isCityFieldSkipped) {
-				address = Address.getAddress(country, city);
-			} else {
-				address = Address.getAddress(country, "");
-			}
-		} else {
-			if (!isCityFieldSkipped) {
-				address = Address.getAddress("", city);
-			}
-		}
-
-		return address;
-	}
-
-	private boolean areRequiredFieldsValid(String username, String password, String firstName, String surname) {
-		if (!Helper.isValid(username)) {
-			System.out.println("Invalid username!");
-			return false;
-		}
-
-		if (!Helper.isValid(password) || password.length() < User.getMinPasswordLength()) {
-			System.out.println("Invalid password!");
-			return false;
-		}
-
-		if (!Helper.isValid(firstName)) {
-			System.out.println("Invalid first name!");
-			return false;
-		}
-
-		if (!Helper.isValid(surname)) {
-			System.out.println("Invalid surname!");
-			return false;
-		}
-
-		return true;
 	}
 
 }
