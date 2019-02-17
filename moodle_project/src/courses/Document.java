@@ -55,7 +55,7 @@ public class Document {
 	}
 
 	private void setPath(String path) throws PathException {
-		if (path != null) {
+		if (path == null) {
 			throw new PathException("Invalid document path!");
 		}
 
