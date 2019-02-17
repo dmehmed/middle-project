@@ -12,6 +12,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
 
+import javax.swing.plaf.synth.SynthSpinnerUI;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -45,28 +47,26 @@ public class CoursesStorage {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void loadData() {
 		Gson gson = new GsonBuilder().create();
-		
+
 		File file = new File(".\\courses_json_files\\courses.json");
-		if(!file.exists()) {
+		if (!file.exists()) {
 			return;
 		}
-		
-		try (BufferedReader buffer = new BufferedReader(new InputStreamReader(
-				new FileInputStream(file))))
-		{
-			
-			Type type = new TypeToken<Map<String, Course>>(){}.getType();
+
+		try (BufferedReader buffer = new BufferedReader(new InputStreamReader(new FileInputStream(file)))) {
+
+			Type type = new TypeToken<Map<String, Course>>() {
+			}.getType();
 			this.courses = gson.fromJson(buffer, type);
 		} catch (IOException e1) {
 			e1.printStackTrace();
-		}	
-		
+		}
+
 	}
-	
-	
+
 	public Course getCourse(String course) {
 		if (!this.courses.containsKey(course)) {
 			System.out.println("There is no such course in system!");
@@ -77,7 +77,7 @@ public class CoursesStorage {
 
 	}
 
-	public void listCategories() {
+	public void listCourses() {
 		this.courses.keySet().stream().forEach(System.out::println);
 	}
 
@@ -93,37 +93,21 @@ public class CoursesStorage {
 			System.out.println("Course with that name already exists!");
 			return;
 		}
-//			try {
-//				this.writer.writeObjectToJSONFile(course);
-//			} catch (NullObjectException e) {
-//				e.printStackTrace();
-//			}
 
 	}
 
-	boolean remove(Course course) {
+	public void remove(Course course) {
 		if (course == null) {
-			return false;
-		}
-
-		if (!this.courses.containsKey(course)) {
-			return false;
-		}
-
-		this.courses.remove(course);
-		return true;
-	}
-
-	void listAllCourses() {
-		if (this.courses.isEmpty()) {
-			java.lang.System.out.println("No courses to list!");
+			System.out.println("Invalid course input!");
 			return;
 		}
 
-//		for (Course course : courses) {
-//			java.lang.System.out.println(course);
-//		}
+		if (!this.courses.containsKey(course.getTitle())) {
+			System.out.println("You try to delete course that doesn't exist!");
+			return;
+		}
 
+		this.courses.remove(course.getTitle());
 	}
 
 }

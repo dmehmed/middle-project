@@ -123,7 +123,7 @@ public class WebSystem2 implements IWebSystem {
 	}
 
 	public void showCourses() {
-		this.coursesStorage.listAllCourses();
+		this.coursesStorage.listCourses();
 	}
 
 }
