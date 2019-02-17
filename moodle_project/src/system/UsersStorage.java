@@ -39,25 +39,25 @@ public class UsersStorage {
 	}
 
 	
-	public void loadData() {
-		Gson gson = new GsonBuilder().create();
+//	public void loadData() {
+//		Gson gson = new GsonBuilder().create();
+//		
+//		try (BufferedReader buffer = new BufferedReader(new InputStreamReader(
+//				new FileInputStream(
+//						new File(".\\users_json_files\\users.json")))))
+//		{
+//			
+//			this.users = gson.fromJson(buffer, Map.class);
+//			//System.out.println(user.toString());
+//			//this.users.put(user.getUsername(), user);
+//			
+//		} catch (IOException e1) {
+//			e1.printStackTrace();
+//		}
+//		
 		
-		try (BufferedReader buffer = new BufferedReader(new InputStreamReader(
-				new FileInputStream(
-						new File(".\\users_json_files\\users.json")))))
-		{
-			
-			this.users = gson.fromJson(buffer, Map.class);
-			//System.out.println(user.toString());
-			//this.users.put(user.getUsername(), user);
-			
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
 		
-		
-		
-	}
+	//}
 	
 	
 	public User getUser(String username) {
@@ -105,7 +105,6 @@ public class UsersStorage {
 	public void saveUsersDataToJSONFile() {
 		try {
 			this.writer.writeObjectToJSONFile(this.users);
-			writer.writeObjectToJSONFile(newUser);
 			System.out.println("Successful user registration!");
 		} catch (NullObjectException e) {
 			e.printStackTrace();

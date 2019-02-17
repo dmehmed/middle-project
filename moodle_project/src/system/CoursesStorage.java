@@ -48,11 +48,11 @@ public class CoursesStorage {
 		if (!this.courses.containsKey(course)) {
 			this.courses.put("", course);
 			
-			try {
-				this.writer.writeObjectToJSONFile(course);
-			} catch (NullObjectException e) {
-				e.printStackTrace();
-			}
+//			try {
+//				this.writer.writeObjectToJSONFile(course);
+//			} catch (NullObjectException e) {
+//				e.printStackTrace();
+//			}
 			
 			return true;
 		} else {

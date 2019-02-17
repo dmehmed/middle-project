@@ -1,6 +1,6 @@
 package listeners;
 
-import system.WebSystem;
+import system.WebSystem2;
 import users.Admin;
 import users.User;
 
@@ -59,18 +59,18 @@ public class AdminCommandListener extends ActiveProfileListener {
 			return;
 		case ActiveProfileListener.VIEW_COURSE_INFO:
 			System.out.println("Enter course name:");
-			courseName = WebSystem.getScanner().nextLine();
+			courseName = WebSystem2.getScanner().nextLine();
 			this.admin.viewCourseInfo(courseName);
 			return;
 		case ActiveProfileListener.VIEW_PARTICIPANTS_IN_COURSE:
 			System.out.println("Enter course name:");
-			courseName = WebSystem.getScanner().nextLine();
+			courseName = WebSystem2.getScanner().nextLine();
 			this.admin.viewParticipantsInCourse(courseName);
 			return;
 		case AdminCommandListener.LOG_OUT:
 			this.admin.setOffline();
 			this.setUser(null);
-			WebSystem.getInstance().setListener(GuestCommandListener.getInstance());
+			WebSystem2.getInstance().setListener(GuestCommandListener.getInstance());
 			return;
 		default:
 			System.out.println("Invalid command!");

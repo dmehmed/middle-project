@@ -1,7 +1,7 @@
 package listeners;
 
 import helper.Helper;
-import system.WebSystem;
+import system.WebSystem2;
 import users.User;
 
 public class GuestCommandListener extends CommandListener {
@@ -35,24 +35,24 @@ public class GuestCommandListener extends CommandListener {
 
 		switch (command) {
 		case GuestCommandListener.LOG_IN_COMMAND:
-			User user = WebSystem.getInstance().logUser();
+			User user = WebSystem2.getInstance().logUser();
 
 			if (Helper.isValid(user)) {
 				if (user instanceof User) {
 					UserCommandListener.getInstance().setUser(user);
-					WebSystem.getInstance().setListener(UserCommandListener.getInstance());
+					WebSystem2.getInstance().setListener(UserCommandListener.getInstance());
 				} else {
 					AdminCommandListener.getInstance().setUser(user);
-					WebSystem.getInstance().setListener(AdminCommandListener.getInstance());
+					WebSystem2.getInstance().setListener(AdminCommandListener.getInstance());
 				}
 			}
 
 			return;
 		case GuestCommandListener.CREATE_NEW_USER_COMMAND:
-			WebSystem.getInstance().createNewUser();
+			WebSystem2.getInstance().createNewUser();
 			return;
 		case GuestCommandListener.LIST_COURSES_BY_CATEGORIES_COMMAND:
-			WebSystem.getInstance().showCourses();
+			WebSystem2.getInstance().showCourses();
 			return;
 		default:
 			System.out.println("Invalid command!");

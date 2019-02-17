@@ -1,6 +1,6 @@
 package listeners;
 
-import system.WebSystem;
+import system.WebSystem2;
 import users.User;
 
 public class UserCommandListener extends ActiveProfileListener {
@@ -52,23 +52,23 @@ public class UserCommandListener extends ActiveProfileListener {
 			return;
 		case ActiveProfileListener.VIEW_COURSE_INFO:
 			System.out.println("Enter course name:");
-			courseName = WebSystem.getScanner().nextLine();
+			courseName = WebSystem2.getScanner().nextLine();
 			this.user.viewCourseInfo(courseName);
 			return;
 		case ActiveProfileListener.VIEW_PARTICIPANTS_IN_COURSE:
 			System.out.println("Enter course name:");
-			courseName = WebSystem.getScanner().nextLine();
+			courseName = WebSystem2.getScanner().nextLine();
 			this.user.viewParticipantsInCourse(courseName);
 			return;
 		case UserCommandListener.VIEW_COURSE_GRADE:
 			System.out.println("Enter course name:");
-			courseName = WebSystem.getScanner().nextLine();
+			courseName = WebSystem2.getScanner().nextLine();
 			this.user.viewCourseGrade(courseName);
 			return;
 		case UserCommandListener.LOG_OUT:
 			this.user.setOffline();
 			this.setUser(null);
-			WebSystem.getInstance().setListener(GuestCommandListener.getInstance());
+			WebSystem2.getInstance().setListener(GuestCommandListener.getInstance());
 			return;
 		default:
 			System.out.println("Invalid command!");

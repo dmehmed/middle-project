@@ -10,35 +10,35 @@ import users.Address;
 import users.User;
 import users.UserBuilder;
 
-public class WebSystem implements IWebSystem {
+public class WebSystem2 implements IWebSystem {
 
 	private static final int EXIT_SYSTEM_COMMAND = 0;
 
-	private static WebSystem systemInstance = null;
+	private static WebSystem2 systemInstance = null;
 	private UsersStorage usersStorage = null;
 	private CoursesStorage coursesStorage = null;
 	private CommandListener listener = null;
 	public static Scanner scanner = null;
 
-	private WebSystem() {
+	private WebSystem2() {
 		this.usersStorage = UsersStorage.getInstance();
 		this.coursesStorage = CoursesStorage.getInstance();
 		this.listener = GuestCommandListener.getInstance();
-		WebSystem.scanner = new Scanner(System.in);
+		WebSystem2.scanner = new Scanner(System.in);
 	}
 
-	public static WebSystem getInstance() {
-		if (WebSystem.systemInstance == null) {
-			WebSystem.systemInstance = new WebSystem();
+	public static WebSystem2 getInstance() {
+		if (WebSystem2.systemInstance == null) {
+			WebSystem2.systemInstance = new WebSystem2();
 		}
 
-		return WebSystem.systemInstance;
+		return WebSystem2.systemInstance;
 	}
 
 	@Override
 	public void start() {
 
-		this.usersStorage.loadData();
+		//this.usersStorage.loadData();
 		
 		int command;
 
@@ -48,7 +48,7 @@ public class WebSystem implements IWebSystem {
 
 			command = scanner.nextInt();
 
-			if (command == WebSystem.EXIT_SYSTEM_COMMAND) {
+			if (command == WebSystem2.EXIT_SYSTEM_COMMAND) {
 				this.usersStorage.saveUsersDataToJSONFile();
 				return;
 			}
@@ -64,15 +64,15 @@ public class WebSystem implements IWebSystem {
 	}
 
 	public static Scanner getScanner() {
-		return WebSystem.scanner;
+		return WebSystem2.scanner;
 	}
 
 	public User logUser() {
 
 		System.out.println("Entry your username:");
-		String username = WebSystem.scanner.next();
+		String username = WebSystem2.scanner.next();
 		System.out.println("Entry your password:");
-		String password = WebSystem.scanner.next();
+		String password = WebSystem2.scanner.next();
 
 		if (!Helper.isValid(username)) {
 			System.out.println("Invalid username!");
