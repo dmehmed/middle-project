@@ -22,5 +22,17 @@
     },
     "isOnline": false,
     "courses": []
+  },
+  "gosho_goshev": {
+    "username": "gosho_goshev",
+    "password": "123456",
+    "firstName": "gosho",
+    "surname": "goshev",
+    "address": {
+      "country": "bulgaria",
+      "city": "sofia"
+    },
+    "isOnline": false,
+    "courses": []
   }
 }
