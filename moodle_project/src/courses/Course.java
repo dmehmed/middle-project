@@ -6,10 +6,12 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Random;
 import java.util.Set;
 
 import exceptions.NameException;
 import exceptions.NullObjectException;
+import exceptions.ObjectCreationException;
 import helper.Helper;
 import system.UsersStorage;
 import users.Admin;
@@ -17,6 +19,7 @@ import users.User;
 
 public class Course implements Updatable {
 
+	private static final int COEFF_RANDOM = 20;
 	private String title; // required
 	private final LocalDate start; // automatically generation when course is created
 	private Admin lecturer; // required!
@@ -66,7 +69,8 @@ public class Course implements Updatable {
 		User user = UsersStorage.getInstance().getUser(username);
 
 		if (!Helper.isValid(user)) {
-			throw new NullObjectException("Invalid user!");
+			System.out.println("Invalid user!");
+			return;
 		}
 
 		if (this.students.containsKey(user)) {
@@ -75,6 +79,7 @@ public class Course implements Updatable {
 		}
 
 		this.students.put(user, 0f);
+		user.addCourse(this);
 	}
 
 	@Override
@@ -90,6 +95,7 @@ public class Course implements Updatable {
 		}
 
 		this.students.remove(user);
+		user.removeCourse(this);
 		System.out.println("You removed user " + user.getUsername() + " from " + this.getTitle() + " course.");
 	}
 
@@ -97,7 +103,8 @@ public class Course implements Updatable {
 	public void addSection(String sectionTitle) throws NameException {
 
 		if (!Helper.isValid(sectionTitle)) {
-			throw new NameException("Invalid section title!");
+			System.out.println("Invalid section title!");
+			return;
 		}
 
 		if (this.sections.containsKey(sectionTitle)) {
@@ -113,10 +120,12 @@ public class Course implements Updatable {
 	public void removeSection(String sectionTitle) {
 
 		if (!Helper.isValid(sectionTitle)) {
+			System.out.println("Invalid section title!");
 			return;
 		}
 
 		if (!this.sections.containsKey(sectionTitle)) {
+			System.out.println("You try to delete section that doesn't exist!");
 			return;
 		}
 
@@ -125,13 +134,13 @@ public class Course implements Updatable {
 	}
 
 	@Override
-	public void addDocument(String sectionTitle, Document document) throws NameException {
+	public void addDocument(String sectionTitle, String document) throws NameException {
 		if (!Helper.isValid(sectionTitle)) {
-			throw new NameException("Invalid section title!");
+			System.out.println("Invalid section title!");
 		}
 
 		if (!Helper.isValid(document)) {
-			throw new NameException("Invalid document!");
+			System.out.println("Invalid document!");
 		}
 
 		if (!this.sections.containsKey(sectionTitle)) {
@@ -139,12 +148,22 @@ public class Course implements Updatable {
 			return;
 		}
 
-		this.sections.get(sectionTitle).add(document);
+		Document d = null;
+
+		try {
+			d = new Document(document, "D:\folder" + new Random().nextInt(COEFF_RANDOM));
+		} catch (ObjectCreationException e) {
+			System.out.println("Invalid input!");
+			return;
+		}
+
+		this.sections.get(sectionTitle).add(d);
 	}
 
 	@Override
-	public void removeDocument(String sectionTitle, Document document) {
+	public void removeDocument(String sectionTitle, String document) {
 		if (!Helper.isValid(sectionTitle) || !Helper.isValid(document)) {
+			System.out.println("You entered invalid section title or invalid document!");
 			return;
 		}
 
@@ -153,7 +172,15 @@ public class Course implements Updatable {
 			return;
 		}
 
-		this.sections.get(sectionTitle).remove(document);
+		Document d = null;
+
+		try {
+			d = new Document(document, "");
+		} catch (ObjectCreationException e) {
+			System.out.println("Invalid input!");
+		}
+
+		this.sections.get(sectionTitle).remove(d);
 	}
 
 	@Override

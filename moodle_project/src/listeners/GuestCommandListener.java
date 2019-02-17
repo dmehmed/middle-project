@@ -1,5 +1,7 @@
 package listeners;
 
+import exceptions.NameException;
+import exceptions.NullObjectException;
 import helper.Helper;
 import system.WebSystem2;
 import users.Admin;
@@ -32,23 +34,20 @@ public class GuestCommandListener extends CommandListener {
 	}
 
 	@Override
-	public void execute(int command) {
+	public void execute(int command) throws NullObjectException, NameException {
 
 		switch (command) {
 		case GuestCommandListener.LOG_IN_COMMAND:
 			User user = WebSystem2.getInstance().logUser();
 
 			if (Helper.isValid(user)) {
+				ActiveProfileListener.setUser(user);
 				if (user instanceof Admin) {
-					AdminCommandListener.getInstance().setUser(user);
 					WebSystem2.getInstance().setListener(AdminCommandListener.getInstance());
-					
 				} else {
-					UserCommandListener.getInstance().setUser(user);
 					WebSystem2.getInstance().setListener(UserCommandListener.getInstance());
 				}
 			}
-
 			return;
 		case GuestCommandListener.CREATE_NEW_USER_COMMAND:
 			WebSystem2.getInstance().createNewUser();

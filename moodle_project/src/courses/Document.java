@@ -29,7 +29,7 @@ public class Document {
 
 		Document d = (Document) obj;
 
-		return this.title.equals(d.title) && this.path.equals(d.path);
+		return this.title.equals(d.title);
 	}
 
 	@Override
@@ -55,7 +55,7 @@ public class Document {
 	}
 
 	private void setPath(String path) throws PathException {
-		if (!Helper.isValid(path)) {
+		if (path != null) {
 			throw new PathException("Invalid document path!");
 		}
 

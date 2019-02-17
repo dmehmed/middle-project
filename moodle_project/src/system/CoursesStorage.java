@@ -13,7 +13,7 @@ public class CoursesStorage {
 	private static CoursesStorage instance = null;
 	private Map<String, Course> courses;
 	private JSONWriter writer = JSONWriter.getInstance();
-	
+
 	private CoursesStorage() {
 		this.courses = new HashMap<String, Course>();
 	}
@@ -40,25 +40,23 @@ public class CoursesStorage {
 		this.courses.keySet().stream().forEach(System.out::println);
 	}
 
-	boolean add(Course course) {
+	public void add(Course course) {
 		if (course == null) {
-			return false;
+			System.out.println("Invalid course");
+			return;
 		}
 
-		if (!this.courses.containsKey(course)) {
-			this.courses.put("", course);
-			
+		if (!this.courses.containsKey(course.getTitle())) {
+			this.courses.put(course.getTitle(), course);
+		} else {
+			System.out.println("Course with that name already exists!");
+			return;
+		}
 //			try {
 //				this.writer.writeObjectToJSONFile(course);
 //			} catch (NullObjectException e) {
 //				e.printStackTrace();
 //			}
-			
-			return true;
-		} else {
-			return false;
-		}
-		
 
 	}
 

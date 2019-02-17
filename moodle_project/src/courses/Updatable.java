@@ -13,8 +13,8 @@ public interface Updatable extends Viewable {
 
 	void removeSection(String sectionTitle);
 
-	void addDocument(String sectionTitle, Document document) throws NameException;
+	void addDocument(String sectionTitle, String document) throws NameException;
 
-	void removeDocument(String sectionTitle, Document document);
+	void removeDocument(String sectionTitle, String document);
 
 }

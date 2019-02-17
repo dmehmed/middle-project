@@ -38,25 +38,31 @@ public class WebSystem2 implements IWebSystem {
 	@Override
 	public void start() {
 
-		this.usersStorage.loadData();
-		
-		int command;
+		try {
 
-		do {
+			this.usersStorage.loadData();
 
-			this.listener.showMenu();
+			int command;
 
-			command = scanner.nextInt();
+			do {
 
-			if (command == WebSystem2.EXIT_SYSTEM_COMMAND) {
-				this.usersStorage.saveUsersDataToJSONFile();
-				return;
-			}
+				this.listener.showMenu();
 
-			this.listener.execute(command);
+				command = scanner.nextInt();
 
-		} while (true);
+				if (command == WebSystem2.EXIT_SYSTEM_COMMAND) {
+					this.usersStorage.saveUsersDataToJSONFile();
+					return;
+				}
 
+				this.listener.execute(command);
+
+			} while (true);
+
+		} catch (Exception e) {
+			System.out.println("Something's gone wrong");
+			return;
+		}
 	}
 
 	public void setListener(CommandListener listener) {

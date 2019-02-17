@@ -1,17 +1,17 @@
 package listeners;
 
+import exceptions.NameException;
+import exceptions.NullObjectException;
 import system.WebSystem2;
 import users.Admin;
 import users.User;
 
 public class AdminCommandListener extends ActiveProfileListener {
 
-	private static final int ADD_PARTICIPANT_IN_COURSE = 5;
-	private static final int REMOVE_PARTICIPANT_IN_COURSE = 6;
-	private static final int LOG_OUT = 6;
+	private static final int CREATE_COURSE = 4;
+	private static final int LOG_OUT = 5;
 
 	private static ActiveProfileListener instance = null;
-	private Admin admin = null;
 
 	public static ActiveProfileListener getInstance() {
 		if (AdminCommandListener.instance == null) {
@@ -21,63 +21,38 @@ public class AdminCommandListener extends ActiveProfileListener {
 	}
 
 	@Override
-	public void setUser(User user) {
-		this.admin = (Admin) user;
-	}
-
-	@Override
 	public void showMenu() {
 
 		System.out.println("User menu:\n");
 		System.out.println("1 - View profile");
 		System.out.println("2 - View my courses");
-		System.out.println("3 - View course");
-		System.out.println("4 - View participants in course");
-		System.out.println("5 - Add participant in course");
-		System.out.println("6 - Remove participant in course");
-		System.out.println("7 - Add section in course");
-		System.out.println("8 - Remove section in course");
-		System.out.println("9 - Add document in course");
-		System.out.println("10 - Remove document in course");
-		System.out.println("11 - Log out");
+		System.out.println("3 - Choose course");
+		System.out.println("4 - Create course");
+		System.out.println("5 - Log out");
 		System.out.println();
 		System.out.println("0 - Exit");
 
 	}
 
 	@Override
-	public void execute(int command) {
-
-		String courseName = null;
+	public void execute(int command) throws NullObjectException, NameException{
 
 		switch (command) {
-		case ActiveProfileListener.VIEW_PROFILE:
-			this.admin.viewProfileInfo();
-			return;
-		case ActiveProfileListener.VIEW_COURSES:
-			this.admin.listCourses();
-			return;
-		case ActiveProfileListener.VIEW_COURSE_INFO:
-			System.out.println("Enter course name:");
-			courseName = WebSystem2.getScanner().nextLine();
-			this.admin.viewCourseInfo(courseName);
-			return;
-		case ActiveProfileListener.VIEW_PARTICIPANTS_IN_COURSE:
-			System.out.println("Enter course name:");
-			courseName = WebSystem2.getScanner().nextLine();
-			this.admin.viewParticipantsInCourse(courseName);
+		case AdminCommandListener.CREATE_COURSE:
+			((Admin) ActiveProfileListener.getUser()).createCourse();
 			return;
 		case AdminCommandListener.LOG_OUT:
-			this.admin.setOffline();
-			this.setUser(null);
+			ActiveProfileListener.getUser().setOffline();
+			ActiveProfileListener.setUser(null);
 			WebSystem2.getInstance().setListener(GuestCommandListener.getInstance());
 			return;
 		default:
-			System.out.println("Invalid command!");
-			return;
+			super.execute(command);
 		}
 
 	}
+//	
+
 
 //
 //			this.showAdminMenu();

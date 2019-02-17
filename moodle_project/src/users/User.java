@@ -1,5 +1,6 @@
 package users;
 
+import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -31,24 +32,31 @@ public class User {
 
 	public void viewProfileInfo() {
 
+		System.out.println("\nProfile Info:\n");
+
 		System.out.println("Username: " + this.username);
 		System.out.println("Name: " + this.firstName + " " + this.surname);
 		if (this.address != null) {
 			System.out.println("Address: " + this.address);
 		}
+
+		System.out.println();
 	}
 
 	public void listCourses() {
 
-		System.out.println("My courses: ");
+		System.out.println("\nMy courses: ");
 
 		for (Viewable course : this.courses) {
 			System.out.println(course);
 		}
 
+		System.out.println();
 	}
 
 	public void viewCourseInfo(String course) {
+
+		System.out.println("Course");
 
 		if (isThereCourse(course)) {
 
@@ -94,6 +102,22 @@ public class User {
 		}
 	}
 
+	public boolean isThereCourse(String course) {
+
+		Course c = CoursesStorage.getInstance().getCourse(course);
+
+		if (c == null) {
+			return false;
+		}
+
+		if (!this.courses.contains(c)) {
+			System.out.println("You are not allowed to view this course!");
+			return false;
+		}
+
+		return true;
+	}
+
 	@Override
 	public String toString() {
 		return this.firstName + " " + this.surname;
@@ -129,20 +153,20 @@ public class User {
 		this.isOnline = false;
 	}
 
-	private boolean isThereCourse(String course) {
+	public void addCourse(Course course) {
+		this.courses.add(course);
+	}
 
-		Course c = CoursesStorage.getInstance().getCourse(course);
+	public void removeCourse(Course course) {
 
-		if (c == null) {
-			return false;
+		for (Iterator<Course> it = this.courses.iterator(); it.hasNext();) {
+			Course currentCourse = it.next();
+			if (currentCourse.equals(course)) {
+				it.remove();
+				return;
+			}
 		}
 
-		if (!this.courses.contains(c)) {
-			System.out.println("You are not allowed to view this course!");
-			return false;
-		}
-
-		return true;
 	}
 
 }

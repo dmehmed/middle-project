@@ -11,4 +11,3 @@ public class Moodle2 {
 	}
 
 }
-
