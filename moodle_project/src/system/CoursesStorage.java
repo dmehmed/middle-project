@@ -55,8 +55,7 @@ public class CoursesStorage {
 		}
 		
 		try (BufferedReader buffer = new BufferedReader(new InputStreamReader(
-				new FileInputStream(
-						file))))
+				new FileInputStream(file))))
 		{
 			
 			Type type = new TypeToken<Map<String, Course>>(){}.getType();

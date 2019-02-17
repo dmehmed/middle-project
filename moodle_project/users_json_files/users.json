@@ -22,5 +22,17 @@
     },
     "isOnline": false,
     "courses": []
+  },
+  "nikolaytomitov": {
+    "username": "nikolaytomitov",
+    "password": "vurzaMi123",
+    "firstName": "Nikolay",
+    "surname": "Tomitov",
+    "address": {
+      "country": "Bulgaria",
+      "city": "Gabrovo"
+    },
+    "isOnline": true,
+    "courses": []
   }
 }
