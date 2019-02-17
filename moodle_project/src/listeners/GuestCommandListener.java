@@ -42,7 +42,7 @@ public class GuestCommandListener extends CommandListener {
 
 			if (Helper.isValid(user)) {
 				ActiveProfileListener.setUser(user);
-				if (user instanceof Admin) {
+				if (user.isAdmin()) {
 					WebSystem2.getInstance().setListener(AdminCommandListener.getInstance());
 				} else {
 					WebSystem2.getInstance().setListener(UserCommandListener.getInstance());

@@ -62,8 +62,7 @@ public class WebSystem2 implements IWebSystem {
 			} while (true);
 
 		} catch (Exception e) {
-			System.out.println("Something's gone wrong");
-			return;
+			e.printStackTrace();
 		}
 	}
 

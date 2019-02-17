@@ -46,7 +46,7 @@ public abstract class ActiveProfileListener extends CommandListener {
 
 				CourseListener.setCourse(CoursesStorage.getInstance().getCourse(course));
 
-				if (ActiveProfileListener.user instanceof Admin) {
+				if (ActiveProfileListener.user.isAdmin()) {
 					WebSystem2.getInstance().setListener(AdminCourseListener.getInstance());
 				} else {
 					WebSystem2.getInstance().setListener(UserCourseListener.getInstance());

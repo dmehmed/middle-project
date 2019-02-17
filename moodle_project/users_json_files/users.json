@@ -8,7 +8,7 @@
       "country": "bulgaria",
       "city": "sofia"
     },
-    "isOnline": true,
+    "isOnline": false,
     "courses": []
   },
   "pesho_peshev": {
@@ -19,18 +19,6 @@
     "address": {
       "country": "bulgaria",
       "city": "sofia"
-    },
-    "isOnline": false,
-    "courses": []
-  },
-  "nikolaytomitov": {
-    "username": "nikolaytomitov",
-    "password": "vurzaMi123",
-    "firstName": "Nikolay",
-    "surname": "Tomitov",
-    "address": {
-      "country": "Bulgaria",
-      "city": "Gabrovo"
     },
     "isOnline": false,
     "courses": []
