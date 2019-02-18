@@ -50,8 +50,8 @@ public class WebSystem2 implements IWebSystem {
 				command = scanner.nextInt();
 
 				if (command == WebSystem2.EXIT_SYSTEM_COMMAND) {
-					this.usersStorage.saveUsersDataToJSONFile();
-					this.coursesStorage.saveCoursesDataToJSONFile();
+//					this.usersStorage.saveUsersDataToJSONFile();
+//					this.coursesStorage.saveCoursesDataToJSONFile();
 					return;
 				}
 

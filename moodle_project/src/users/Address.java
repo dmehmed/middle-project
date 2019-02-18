@@ -36,4 +36,14 @@ public class Address {
 		this.city = city;
 	}
 
+	public String getCountry() {
+		return country;
+	}
+
+	public String getCity() {
+		return city;
+	}
+	
+	
+
 }

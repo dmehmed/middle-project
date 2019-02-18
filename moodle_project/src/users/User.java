@@ -191,6 +191,18 @@ public class User {
 		this.isAdmin = isAdmin;
 	}
 
+	String getFirstName() {
+		return firstName;
+	}
+
+	String getSurname() {
+		return surname;
+	}
+
+	Address getAddress() {
+		return address;
+	}
+
 	public void update() {
 
 		System.out.println("Choose option:\n");

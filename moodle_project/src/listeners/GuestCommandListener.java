@@ -6,6 +6,7 @@ import helper.Helper;
 import system.WebSystem2;
 import users.Admin;
 import users.User;
+import users.UserBuilder;
 
 public class GuestCommandListener extends CommandListener {
 
@@ -39,11 +40,10 @@ public class GuestCommandListener extends CommandListener {
 		switch (command) {
 		case GuestCommandListener.LOG_IN_COMMAND:
 			User user = WebSystem2.getInstance().logUser();
-
+			
 			if (Helper.isValid(user)) {
 				ActiveProfileListener.setUser(user);
 				if (user.isAdmin()) {
-					AdminCommandListener.setUser(user);
 					WebSystem2.getInstance().setListener(AdminCommandListener.getInstance());
 				} else {
 					WebSystem2.getInstance().setListener(UserCommandListener.getInstance());

@@ -53,8 +53,6 @@ public class Course implements Updatable {
 		}
 
 		return new Course(title, lecturer);
-		// izvikai sistemata da go dobavi
-
 	}
 
 	@Override
@@ -74,7 +72,6 @@ public class Course implements Updatable {
 		User user = UsersStorage.getInstance().getUser(username);
 
 		if (!Helper.isValid(user)) {
-			System.out.println("Invalid user!");
 			return;
 		}
 
