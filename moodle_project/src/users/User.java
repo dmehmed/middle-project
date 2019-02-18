@@ -183,12 +183,28 @@ public class User {
 		this.courses.add(course);
 	}
 
+	public String getName() {
+		return this.firstName + " " + this.surname;
+	}
+
 	public boolean isAdmin() {
 		return this.isAdmin;
 	}
 
 	protected void setAdmin(boolean isAdmin) {
 		this.isAdmin = isAdmin;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public String getSurname() {
+		return surname;
+	}
+
+	public Address getAddress() {
+		return address;
 	}
 
 	public void update() {

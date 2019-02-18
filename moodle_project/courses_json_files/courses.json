@@ -1,1 +1,44 @@
-{}
+{
+  "PHP": {
+    "title": "PHP",
+    "start": {
+      "year": 2019,
+      "month": 2,
+      "day": 18
+    },
+    "lecturer": "Nikolay Tomitov",
+    "students": {
+      "Galq Petrova": 0.0,
+      "Deniz Mehmed": 0.0
+    },
+    "sections": {
+      "Lecture 12": [
+        {
+          "title": "PHPzaEdinDen.pdf",
+          "path": "D:\folder5"
+        }
+      ]
+    }
+  },
+  "Java2EE": {
+    "title": "Java2EE",
+    "start": {
+      "year": 2019,
+      "month": 2,
+      "day": 18
+    },
+    "lecturer": "Nikolay Tomitov",
+    "students": {
+      "Ivo Kovachev": 0.0,
+      "Deniz Mehmed": 0.0
+    },
+    "sections": {
+      "Lecture 1": [
+        {
+          "title": "BasicJava.pdf",
+          "path": "D:\folder3"
+        }
+      ]
+    }
+  }
+}

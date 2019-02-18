@@ -45,22 +45,22 @@ public class WebSystem2 implements IWebSystem {
 
 			do {
 
-				this.listener.showMenu();
+					this.listener.showMenu();
 
-				command = scanner.nextInt();
+					command = scanner.nextInt();
 
-				if (command == WebSystem2.EXIT_SYSTEM_COMMAND) {
-//					this.usersStorage.saveUsersDataToJSONFile();
-//					this.coursesStorage.saveCoursesDataToJSONFile();
-					return;
-				}
+					if (command == WebSystem2.EXIT_SYSTEM_COMMAND) {
+						this.usersStorage.saveUsersDataToJSONFile();
+						this.coursesStorage.saveCoursesDataToJSONFile();
+						return;
+					}
 
-				this.listener.execute(command);
+					this.listener.execute(command);
+
 
 			} while (true);
 
 		} catch (Exception e) {
-			e.printStackTrace();
 			System.out.println("Something's gone wrong...");
 		}
 	}

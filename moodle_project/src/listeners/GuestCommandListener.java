@@ -5,6 +5,7 @@ import exceptions.NullObjectException;
 import helper.Helper;
 import system.WebSystem2;
 import users.User;
+import users.UserBuilder;
 
 public class GuestCommandListener extends CommandListener {
 
@@ -38,6 +39,8 @@ public class GuestCommandListener extends CommandListener {
 		switch (command) {
 		case GuestCommandListener.LOG_IN_COMMAND:
 			User user = WebSystem2.getInstance().logUser();
+			
+			user = UserBuilder.cast(user);
 			
 			if (Helper.isValid(user)) {
 				ActiveProfileListener.setUser(user);

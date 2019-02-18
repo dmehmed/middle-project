@@ -49,7 +49,7 @@ public class JSONWriter {
 			}
 		}
 
-		try (PrintWriter writer = new PrintWriter(new FileOutputStream(file), true)) {
+		try (PrintWriter writer = new PrintWriter(new FileOutputStream(file))) {
 			this.gson.toJson(users, writer);
 
 		} catch (IOException e) {
@@ -76,7 +76,7 @@ public class JSONWriter {
 			}
 		}
 
-		try (PrintWriter writer = new PrintWriter(new FileOutputStream(file), true)) {
+		try (PrintWriter writer = new PrintWriter(new FileOutputStream(file))) {
 			this.gson.toJson(courses, writer);
 
 		} catch (IOException e) {

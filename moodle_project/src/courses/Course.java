@@ -9,6 +9,8 @@ import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Set;
 
+import com.google.gson.annotations.Expose;
+
 import exceptions.NameException;
 import exceptions.NullObjectException;
 import exceptions.ObjectCreationException;
@@ -20,19 +22,21 @@ import users.User;
 public class Course implements Updatable {
 
 	private static final int COEFF_RANDOM = 20;
+	
 	private String title; // required
 	private final LocalDate start; // automatically generation when course is created
-	private Admin lecturer; // required!
-	private Map<User, Float> students; // elements in it are optional but memory must be allocated //map<username,
+//	@Expose(serialize = false, deserialize = false)
+	private String lecturer; // required!
+	private Map<String, Float> students; // elements in it are optional but memory must be allocated //map<username,
 	// integer>
 	private Map<String, Set<Document>> sections; // elements in it are optional but memory must be allocated
 
 	Course(String title, Admin lecturer) {
 
 		this.title = title;
-		this.lecturer = lecturer;
+		this.lecturer = lecturer.getName();
 		this.start = LocalDate.now();
-		this.students = new HashMap<User, Float>();
+		this.students = new HashMap<String, Float>();
 		this.sections = new LinkedHashMap<String, Set<Document>>();
 
 	}
@@ -75,12 +79,12 @@ public class Course implements Updatable {
 			return;
 		}
 
-		if (this.students.containsKey(user)) {
+		if (this.students.containsKey(user.getName())) {
 			System.out.println("User " + user.getUsername() + " is already in " + this.getTitle() + " course.");
 			return;
 		}
 
-		this.students.put(user, 0f);
+		this.students.put(user.getName(), 0f);
 		user.addCourse(this);
 	}
 
@@ -92,11 +96,11 @@ public class Course implements Updatable {
 		// in method add we have validation for null user but we can return if user is
 		// null or collection doesn't contains it
 
-		if (!Helper.isValid(user) || !this.students.containsKey(user)) {
+		if (!Helper.isValid(user) || !this.students.containsKey(user.getName())) {
 			return;
 		}
 
-		this.students.remove(user);
+		this.students.remove(user.getName());
 		user.removeCourse(this);
 		System.out.println("You removed user " + user.getUsername() + " from " + this.getTitle() + " course.");
 	}
@@ -202,8 +206,8 @@ public class Course implements Updatable {
 		return start;
 	}
 
-	public Admin getLecturer() {
-		return lecturer;
+	public String getLecturer() {
+		return this.lecturer;
 	}
 
 	public String getTitle() {
@@ -214,7 +218,7 @@ public class Course implements Updatable {
 	public void viewParticipants() {
 
 		System.out.println("Admin: " + this.lecturer);
-		for (User student : this.students.keySet()) {
+		for (String student : this.students.keySet()) {
 			System.out.println("Student: " + student);
 		}
 

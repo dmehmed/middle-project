@@ -76,4 +76,13 @@ public abstract class UserBuilder {
 		return true;
 	}
 
+	public static User cast(User user) {
+		if (!user.isAdmin()) {
+			return user;
+		}
+
+		return new Admin(user.getUsername(), user.getPassword(), user.getFirstName(), user.getSurname(),
+				user.getAddress());
+	}
+
 }
