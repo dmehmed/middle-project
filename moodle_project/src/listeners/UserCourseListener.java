@@ -14,7 +14,7 @@ public class UserCourseListener extends CourseListener {
 
 	public static CourseListener getInstance() {
 		if (UserCourseListener.instance == null) {
-			UserCourseListener.instance = new AdminCourseListener();
+			UserCourseListener.instance = new UserCourseListener();
 		}
 
 		return UserCourseListener.instance;

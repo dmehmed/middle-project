@@ -1,5 +1,7 @@
 package users;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
@@ -30,7 +32,6 @@ public class User {
 	protected Set<Course> courses; // sorted by day of creation from new to old
 
 	User(String username, String password, String firstName, String surname, Address address) {
-		this.isAdmin = false;
 		this.username = username;
 		this.password = password;
 		this.firstName = firstName;
@@ -293,5 +294,13 @@ public class User {
 			return;
 		}
 
+	}
+
+	Set<Course> getCourses() {
+		return Collections.unmodifiableSet(this.courses);
+	}
+
+	void setCourses(Set<Course> courses) {
+		this.courses = courses;
 	}
 }

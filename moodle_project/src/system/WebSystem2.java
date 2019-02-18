@@ -2,6 +2,8 @@ package system;
 
 import java.util.Scanner;
 
+import exceptions.NameException;
+import exceptions.NullObjectException;
 import helper.Helper;
 import listeners.CommandListener;
 import listeners.GuestCommandListener;
@@ -36,33 +38,38 @@ public class WebSystem2 implements IWebSystem {
 	@Override
 	public void start() {
 
-		try {
+		this.usersStorage.loadUSersDataFromJSONFile();
+		this.coursesStorage.loadCoursesDataFromJSONFile();
 
-			this.usersStorage.loadUSersDataFromJSONFile();
-			this.coursesStorage.loadCoursesDataFromJSONFile();
+		int command;
 
-			int command;
+		do {
 
-			do {
+			try {
 
-					this.listener.showMenu();
+				this.listener.showMenu();
 
-					command = scanner.nextInt();
+				command = scanner.nextInt();
 
-					if (command == WebSystem2.EXIT_SYSTEM_COMMAND) {
-						this.usersStorage.saveUsersDataToJSONFile();
-						this.coursesStorage.saveCoursesDataToJSONFile();
-						return;
-					}
+				if (command == WebSystem2.EXIT_SYSTEM_COMMAND) {
+					this.usersStorage.saveUsersDataToJSONFile();
+					this.coursesStorage.saveCoursesDataToJSONFile();
+					return;
+				}
 
+				try {
 					this.listener.execute(command);
+				} catch (NullObjectException | NameException e) {
+					if (e.getMessage() != null)
+						System.out.println(e.getMessage());
+				}
 
+			} catch (Exception e) {
+				if (e.getMessage() != null)
+					System.out.println(e.getMessage());
+			}
 
-			} while (true);
-
-		} catch (Exception e) {
-			System.out.println("Something's gone wrong...");
-		}
+		} while (true);
 	}
 
 	public void setListener(CommandListener listener) {

@@ -6,11 +6,21 @@
     "firstName": "Nikolay",
     "surname": "Tomitov",
     "address": {
-      "country": "Bulgaria",
-      "city": "Gabrovo"
+      "country": "Bulgaria"
     },
     "isOnline": true,
-    "courses": []
+    "courses": [
+      {
+        "title": "Java2EE",
+        "start": {
+          "year": 2019,
+          "month": 2,
+          "day": 18
+        },
+        "students": {},
+        "sections": {}
+      }
+    ]
   },
   "deniz.mehmed": {
     "isAdmin": false,
@@ -19,117 +29,10 @@
     "firstName": "Deniz",
     "surname": "Mehmed",
     "address": {
+      "country": "Bulgaria",
       "city": "Varna"
     },
     "isOnline": false,
-    "courses": [
-      {
-        "title": "Java2EE",
-        "start": {
-          "year": 2019,
-          "month": 2,
-          "day": 18
-        },
-        "lecturer": "Nikolay Tomitov",
-        "students": {
-          "Ivo Kovachev": 0.0,
-          "Deniz Mehmed": 0.0
-        },
-        "sections": {
-          "Lecture 1": [
-            {
-              "title": "BasicJava.pdf",
-              "path": "D:\folder3"
-            }
-          ]
-        }
-      },
-      {
-        "title": "PHP",
-        "start": {
-          "year": 2019,
-          "month": 2,
-          "day": 18
-        },
-        "lecturer": "Nikolay Tomitov",
-        "students": {
-          "Galq Petrova": 0.0,
-          "Deniz Mehmed": 0.0
-        },
-        "sections": {
-          "Lecture 12": [
-            {
-              "title": "PHPzaEdinDen.pdf",
-              "path": "D:\folder5"
-            }
-          ]
-        }
-      }
-    ]
-  },
-  "ivo_kovachev": {
-    "isAdmin": false,
-    "username": "ivo_kovachev",
-    "password": "ivo1234",
-    "firstName": "Ivo",
-    "surname": "Kovachev",
-    "address": {
-      "country": "Bulgaria"
-    },
-    "isOnline": false,
-    "courses": [
-      {
-        "title": "Java2EE",
-        "start": {
-          "year": 2019,
-          "month": 2,
-          "day": 18
-        },
-        "lecturer": "Nikolay Tomitov",
-        "students": {
-          "Ivo Kovachev": 0.0,
-          "Deniz Mehmed": 0.0
-        },
-        "sections": {
-          "Lecture 1": [
-            {
-              "title": "BasicJava.pdf",
-              "path": "D:\folder3"
-            }
-          ]
-        }
-      }
-    ]
-  },
-  "galq.petrova": {
-    "isAdmin": false,
-    "username": "galq.petrova",
-    "password": "golq1234",
-    "firstName": "Galq",
-    "surname": "Petrova",
-    "isOnline": false,
-    "courses": [
-      {
-        "title": "PHP",
-        "start": {
-          "year": 2019,
-          "month": 2,
-          "day": 18
-        },
-        "lecturer": "Nikolay Tomitov",
-        "students": {
-          "Galq Petrova": 0.0,
-          "Deniz Mehmed": 0.0
-        },
-        "sections": {
-          "Lecture 12": [
-            {
-              "title": "PHPzaEdinDen.pdf",
-              "path": "D:\folder5"
-            }
-          ]
-        }
-      }
-    ]
+    "courses": []
   }
 }

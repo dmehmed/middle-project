@@ -81,8 +81,10 @@ public abstract class UserBuilder {
 			return user;
 		}
 
-		return new Admin(user.getUsername(), user.getPassword(), user.getFirstName(), user.getSurname(),
+		User u = new Admin(user.getUsername(), user.getPassword(), user.getFirstName(), user.getSurname(),
 				user.getAddress());
+		u.setCourses(user.getCourses());
+		return u;
 	}
 
 }
