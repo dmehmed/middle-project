@@ -12,7 +12,6 @@ import com.google.gson.GsonBuilder;
 import courses.Course;
 import exceptions.NullObjectException;
 import helper.Helper;
-import users.Admin;
 import users.User;
 
 public class JSONWriter {

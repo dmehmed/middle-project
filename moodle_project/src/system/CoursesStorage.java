@@ -1,26 +1,10 @@
 package system;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.lang.reflect.Type;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
-import java.util.Map.Entry;
-
-import javax.swing.plaf.synth.SynthSpinnerUI;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 
 import courses.Course;
 import exceptions.NullObjectException;
-import users.User;
 
 public class CoursesStorage {
 
