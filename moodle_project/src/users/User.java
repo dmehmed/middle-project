@@ -1,7 +1,5 @@
 package users;
 
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
@@ -37,7 +35,7 @@ public class User {
 		this.firstName = firstName;
 		this.surname = surname;
 		this.address = address;
-		this.courses = new TreeSet<Course>((c1, c2) -> {
+		this.courses = new TreeSet<Course>((c2, c1) -> {
 			if (c1.getStart().equals(c2.getStart())) {
 				return c1.getTitle().compareTo(c2.getTitle());
 			}
@@ -208,6 +206,7 @@ public class User {
 		return address;
 	}
 
+	// you need to update this method
 	public void update() {
 
 		System.out.println("Choose option:\n");
@@ -266,7 +265,7 @@ public class User {
 			WebSystem2.getScanner().nextLine();
 			update = WebSystem2.getScanner().nextLine();
 
-			if (Helper.isValid(update)) {
+			if (update != null) {
 				this.address.setCountry(update);
 				System.out.println("You have successfully edited your profile!");
 				return;
@@ -280,7 +279,7 @@ public class User {
 			WebSystem2.getScanner().nextLine();
 			update = WebSystem2.getScanner().nextLine();
 
-			if (Helper.isValid(update)) {
+			if (update != null) {
 				this.address.setCity(update);
 				System.out.println("You have successfully edited your profile!");
 				return;
@@ -297,7 +296,7 @@ public class User {
 	}
 
 	Set<Course> getCourses() {
-		return Collections.unmodifiableSet(this.courses);
+		return this.courses;
 	}
 
 	void setCourses(Set<Course> courses) {

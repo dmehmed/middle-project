@@ -19,7 +19,7 @@ public abstract class ActiveProfileListener extends CommandListener {
 		ActiveProfileListener.user = user;
 	}
 
-	static User getUser() {
+	public static User getUser() {
 		return ActiveProfileListener.user;
 	}
 

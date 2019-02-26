@@ -60,6 +60,7 @@ public class UsersStorage {
 		}
 
 		this.users.put(newUser.getUsername(), newUser);
+		System.out.println("Your registration was successful!");
 	}
 
 	public void saveUsersDataToJSONFile() {

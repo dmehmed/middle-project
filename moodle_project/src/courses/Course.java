@@ -25,20 +25,16 @@ public class Course implements Updatable {
 	
 	private String title; // required
 	private final LocalDate start; // automatically generation when course is created
-//	@Expose(serialize = false, deserialize = false)
-	private String lecturer; // required!
-	private Map<String, Float> students; // elements in it are optional but memory must be allocated //map<username,
-	// integer>
+	private transient Admin lecturer; // required!
+	private Map<String, Float> students; // elements in it are optional but memory must be allocated
 	private Map<String, Set<Document>> sections; // elements in it are optional but memory must be allocated
 
 	Course(String title, Admin lecturer) {
-
 		this.title = title;
-		this.lecturer = lecturer.getName();
+		this.lecturer = lecturer;
 		this.start = LocalDate.now();
 		this.students = new HashMap<String, Float>();
 		this.sections = new LinkedHashMap<String, Set<Document>>();
-
 	}
 
 	@Override
@@ -206,7 +202,7 @@ public class Course implements Updatable {
 		return start;
 	}
 
-	public String getLecturer() {
+	public Admin getLecturer() {
 		return this.lecturer;
 	}
 

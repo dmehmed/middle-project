@@ -11,11 +11,11 @@ public class Address {
 	public static Address getAddress(String country, String city) {
 		Address a = new Address();
 
-		if (country != "") {
+		if (country != null) {
 			a.setCountry(country);
 		}
 
-		if (city != "") {
+		if (city != null) {
 			a.setCity(city);
 		}
 
@@ -24,8 +24,7 @@ public class Address {
 
 	@Override
 	public String toString() {
-		return (this.city != null ? this.city : "") + (this.country != null && this.city != null ? ", " : "")
-				+ (this.country != null ? this.country : "");
+		return this.city + (this.country.length() != 0 && this.city.length() != 0 ? ", " : "") + this.country;
 	}
 
 	void setCountry(String country) {

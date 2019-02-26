@@ -40,9 +40,8 @@ public class GuestCommandListener extends CommandListener {
 		case GuestCommandListener.LOG_IN_COMMAND:
 			User user = WebSystem2.getInstance().logUser();
 			
-			user = UserBuilder.cast(user);
-			
 			if (Helper.isValid(user)) {
+				user = UserBuilder.cast(user);
 				ActiveProfileListener.setUser(user);
 				if (user.isAdmin()) {
 					WebSystem2.getInstance().setListener(AdminCommandListener.getInstance());

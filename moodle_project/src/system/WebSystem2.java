@@ -5,6 +5,7 @@ import java.util.Scanner;
 import exceptions.NameException;
 import exceptions.NullObjectException;
 import helper.Helper;
+import listeners.ActiveProfileListener;
 import listeners.CommandListener;
 import listeners.GuestCommandListener;
 import users.User;
@@ -12,7 +13,7 @@ import users.UserBuilder;
 
 public class WebSystem2 implements IWebSystem {
 
-	private static final int EXIT_SYSTEM_COMMAND = 0;
+	public static final int EXIT_SYSTEM_COMMAND = 0;
 
 	private static WebSystem2 systemInstance = null;
 	private UsersStorage usersStorage = null;
@@ -41,7 +42,7 @@ public class WebSystem2 implements IWebSystem {
 		this.usersStorage.loadUSersDataFromJSONFile();
 		this.coursesStorage.loadCoursesDataFromJSONFile();
 
-		int command;
+		int command = -1;
 
 		do {
 
@@ -52,6 +53,13 @@ public class WebSystem2 implements IWebSystem {
 				command = scanner.nextInt();
 
 				if (command == WebSystem2.EXIT_SYSTEM_COMMAND) {
+					
+					User user = ActiveProfileListener.getUser();
+					
+					if(Helper.isValid(user)) {
+						user.setOffline();
+					}
+					
 					this.usersStorage.saveUsersDataToJSONFile();
 					this.coursesStorage.saveCoursesDataToJSONFile();
 					return;
@@ -65,11 +73,12 @@ public class WebSystem2 implements IWebSystem {
 				}
 
 			} catch (Exception e) {
-				if (e.getMessage() != null)
-					System.out.println(e.getMessage());
+				System.out.println("Invalid command!");
+				scanner = new Scanner(System.in);
 			}
 
 		} while (true);
+
 	}
 
 	public void setListener(CommandListener listener) {
@@ -104,7 +113,7 @@ public class WebSystem2 implements IWebSystem {
 	public void createNewUser() {
 
 		System.out.println("Fields marked with * are required!");
-		System.out.println("To skip optional information write \"skip\"\n");
+		System.out.println("To skip optional information press enter");
 
 		System.out.println("* Enter username:");
 		String username = scanner.next();
@@ -124,8 +133,6 @@ public class WebSystem2 implements IWebSystem {
 
 		User newUser = UserBuilder.createUser(isAdmin, username, password, firstName, surname, country, city);
 		this.usersStorage.addUser(newUser);
-
-		System.out.println("Your registration was successful!");
 	}
 
 	public void showCourses() {

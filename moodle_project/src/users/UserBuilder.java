@@ -6,7 +6,7 @@ import system.UsersStorage;
 public abstract class UserBuilder {
 
 	private static final String ADMIN_CREATION_COMMAND = "yes";
-	private static final String COMMAND_SKIP_OPTIONAL_FIELDS_REGISTRATION = "skip";
+	private static final String COMMAND_SKIP_OPTIONAL_FIELDS_REGISTRATION = "\n";
 
 	public static User createUser(String isAdmin, String username, String password, String firstName, String surname,
 			String country, String city) {
@@ -20,10 +20,7 @@ public abstract class UserBuilder {
 			return null;
 		}
 
-		boolean isCountryFieldSkipped = country.toLowerCase().equals(COMMAND_SKIP_OPTIONAL_FIELDS_REGISTRATION);
-		boolean isCityFieldSkipped = city.toLowerCase().equals(COMMAND_SKIP_OPTIONAL_FIELDS_REGISTRATION);
-
-		Address userAddress = UserBuilder.generateAddress(country, city, isCountryFieldSkipped, isCityFieldSkipped);
+		Address userAddress = UserBuilder.generateAddress(country, city);
 
 		if (isAdmin.equals(ADMIN_CREATION_COMMAND)) {
 			return new Admin(username, password, firstName, surname, userAddress);
@@ -32,24 +29,19 @@ public abstract class UserBuilder {
 		return new User(username, password, firstName, surname, userAddress);
 	}
 
-	private static Address generateAddress(String country, String city, boolean isCountryFieldSkipped,
-			boolean isCityFieldSkipped) {
+	private static Address generateAddress(String country, String city) {
 
 		Address address = null;
 
-		if (!isCountryFieldSkipped) {
-			if (!isCityFieldSkipped) {
-				address = Address.getAddress(country, city);
-			} else {
-				address = Address.getAddress(country, "");
-			}
-		} else {
-			if (!isCityFieldSkipped) {
-				address = Address.getAddress("", city);
-			}
+		if (country.equals(COMMAND_SKIP_OPTIONAL_FIELDS_REGISTRATION)) {
+			country = "";
 		}
 
-		return address;
+		if (city.equals(COMMAND_SKIP_OPTIONAL_FIELDS_REGISTRATION)) {
+			city = "";
+		}
+
+		return Address.getAddress(country, city);
 	}
 
 	private static boolean areRequiredFieldsValid(String username, String password, String firstName, String surname) {
@@ -84,6 +76,7 @@ public abstract class UserBuilder {
 		User u = new Admin(user.getUsername(), user.getPassword(), user.getFirstName(), user.getSurname(),
 				user.getAddress());
 		u.setCourses(user.getCourses());
+		UsersStorage.getInstance().addUser(u);
 		return u;
 	}
 

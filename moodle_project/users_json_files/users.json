@@ -8,7 +8,7 @@
     "address": {
       "country": "Bulgaria"
     },
-    "isOnline": true,
+    "isOnline": false,
     "courses": [
       {
         "title": "Java2EE",
@@ -30,6 +30,19 @@
     "surname": "Mehmed",
     "address": {
       "country": "Bulgaria",
+      "city": "Varna"
+    },
+    "isOnline": false,
+    "courses": []
+  },
+  "hristo": {
+    "isAdmin": false,
+    "username": "hristo",
+    "password": "123456",
+    "firstName": "Hristo",
+    "surname": "Penev",
+    "address": {
+      "country": "",
       "city": "Varna"
     },
     "isOnline": false,
